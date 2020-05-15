@@ -5,7 +5,8 @@
     "lib": ["esnext"],
     "sourceMap": false, // 소스맵 생성 안함
     "watch": false, // 빌드 파일 생성 여부
-    "strict": true // # 엄격모드
+    "strict": true, // # 엄격모드
+    "typeRoots": ["./node_modules/@types", "./src/tyeps"]
   },
   "include": [ // 컴파일 대상
     "src/**/*"

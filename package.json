@@ -1,26 +1,38 @@
 {
   "name": "boilerplate-graphql-prisma-typescript",
   "version": "0.0.1",
+  "license": "private",
   "scripts": {
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index",
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/app",
     "start": "cross-env NODE_ENV=production node dist",
     "clean": "rm -rf dist",
     "build": "yarn clean && yarn generate && tsc",
+    "updateSchema": "npx prisma introspect",
     "generate": "yarn generate:prisma && yarn generate:nexus",
-    "generate:prisma": "npx prisma introspect && npx prisma generate",
-    "generate:nexus": "ts-node --transpile-only src/schema/index"
+    "generate:prisma": "npx prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/graphql/index"
   },
   "dependencies": {
     "@prisma/client": "^2.0.0-beta.4",
+    "@types/body-parser": "^1.19.0",
+    "body-parser": "^1.19.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
+    "firebase": "^7.14.4",
     "graphql-yoga": "^1.18.3",
     "nexus": "^0.21.0",
-    "nexus-prisma": "^0.13.0"
+    "nexus-prisma": "^0.13.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "@prisma/cli": "^2.0.0-beta.4",
+    "@types/firebase": "^3.2.1",
     "@types/node": "^13.13.5",
+    "@types/passport": "^1.0.3",
+    "@types/passport-google-oauth": "^1.0.41",
+    "@types/passport-jwt": "^3.0.3",
     "@types/ws": "^7.2.4",
     "ts-node": "^8.10.1",
     "ts-node-dev": "^1.0.0-pre.44",

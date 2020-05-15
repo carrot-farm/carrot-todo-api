@@ -1,7 +1,7 @@
-# graphql 기본 셋팅
+# carrot-todo-ali
 
 ## 개요
-* graphql을 이용한 프로젝트 셋팅
+* todo 앱 api 서버
 
 ## 주요 스택
 * graphql-yoga

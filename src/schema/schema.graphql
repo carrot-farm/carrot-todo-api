@@ -2,27 +2,200 @@
 ### Do not make changes to this file directly
 
 
-type link {
-  description: String!
-  id: Int!
-  url: String!
-  userId: Int
+scalar DateTime
+
+input login_logCreateManyWithoutUserInput {
+  connect: [login_logWhereUniqueInput!]
+  create: [login_logCreateWithoutUserInput!]
 }
 
-input linkWhereUniqueInput {
+input login_logCreateWithoutUserInput {
+  login_ip: String!
+  login_time: DateTime
+}
+
+input login_logWhereUniqueInput {
   id: Int
-  userId: Int
+  user_pk: Int
+}
+
+type Mutation {
+  createOneuser(data: userCreateInput!): user!
+  signup(email: String!): user!
+}
+
+input oauthCreateManyWithoutUserInput {
+  connect: [oauthWhereUniqueInput!]
+  create: [oauthCreateWithoutUserInput!]
+}
+
+input oauthCreateWithoutUserInput {
+  access_token: String!
+  provider: String!
+}
+
+input oauthWhereUniqueInput {
+  id: Int
+  user_pk: Int
 }
 
 type Query {
   """테스트"""
   info: String!
+  users(after: userWhereUniqueInput, before: userWhereUniqueInput, first: Int, last: Int, skip: Int): [user!]!
+}
+
+input register_logCreateManyWithoutUserInput {
+  connect: [register_logWhereUniqueInput!]
+  create: [register_logCreateWithoutUserInput!]
+}
+
+input register_logCreateWithoutUserInput {
+  register_ip: String!
+  register_time: DateTime
+}
+
+input register_logWhereUniqueInput {
+  id: Int
+  user_pk: Int
+}
+
+input todo_categoryCreateManyWithoutUserInput {
+  connect: [todo_categoryWhereUniqueInput!]
+  create: [todo_categoryCreateWithoutUserInput!]
+}
+
+input todo_categoryCreateOneWithoutTodoInput {
+  connect: todo_categoryWhereUniqueInput
+  create: todo_categoryCreateWithoutTodoInput
+}
+
+input todo_categoryCreateWithoutTodoInput {
+  category: String!
+  user: userCreateOneWithoutTodo_categoryInput!
+}
+
+input todo_categoryCreateWithoutUserInput {
+  category: String!
+  todo: todoCreateManyWithoutTodo_categoryInput
+}
+
+input todo_categoryWhereUniqueInput {
+  id: Int
+  user_pk: Int
+}
+
+input todoCreateManyWithoutTodo_categoryInput {
+  connect: [todoWhereUniqueInput!]
+  create: [todoCreateWithoutTodo_categoryInput!]
+}
+
+input todoCreateManyWithoutUserInput {
+  connect: [todoWhereUniqueInput!]
+  create: [todoCreateWithoutUserInput!]
+}
+
+input todoCreateWithoutTodo_categoryInput {
+  is_completed: Int!
+  todo: String
+  user: userCreateOneWithoutTodoInput!
+}
+
+input todoCreateWithoutUserInput {
+  is_completed: Int!
+  todo: String
+  todo_category: todo_categoryCreateOneWithoutTodoInput!
+}
+
+input todoWhereUniqueInput {
+  id: Int
+  todo_category_pk: Int
+  user_pk: Int
 }
 
 type user {
   email: String!
   id: Int!
-  link(after: linkWhereUniqueInput, before: linkWhereUniqueInput, first: Int, last: Int, skip: Int): [link!]!
-  name: String!
+  is_block: Int
+  is_withdraw: Int
   password: String!
+  password_salt: String!
+  user_id: String!
+}
+
+input userCreateInput {
+  email: String!
+  is_block: Int
+  is_verify: Int
+  is_withdraw: Int
+  login_log: login_logCreateManyWithoutUserInput
+  oauth: oauthCreateManyWithoutUserInput
+  password: String!
+  password_salt: String!
+  register_log: register_logCreateManyWithoutUserInput
+  todo: todoCreateManyWithoutUserInput
+  todo_category: todo_categoryCreateManyWithoutUserInput
+  user_id: String!
+  withdraw_log: withdraw_logCreateManyWithoutUserInput
+}
+
+input userCreateOneWithoutTodo_categoryInput {
+  connect: userWhereUniqueInput
+  create: userCreateWithoutTodo_categoryInput
+}
+
+input userCreateOneWithoutTodoInput {
+  connect: userWhereUniqueInput
+  create: userCreateWithoutTodoInput
+}
+
+input userCreateWithoutTodo_categoryInput {
+  email: String!
+  is_block: Int
+  is_verify: Int
+  is_withdraw: Int
+  login_log: login_logCreateManyWithoutUserInput
+  oauth: oauthCreateManyWithoutUserInput
+  password: String!
+  password_salt: String!
+  register_log: register_logCreateManyWithoutUserInput
+  todo: todoCreateManyWithoutUserInput
+  user_id: String!
+  withdraw_log: withdraw_logCreateManyWithoutUserInput
+}
+
+input userCreateWithoutTodoInput {
+  email: String!
+  is_block: Int
+  is_verify: Int
+  is_withdraw: Int
+  login_log: login_logCreateManyWithoutUserInput
+  oauth: oauthCreateManyWithoutUserInput
+  password: String!
+  password_salt: String!
+  register_log: register_logCreateManyWithoutUserInput
+  todo_category: todo_categoryCreateManyWithoutUserInput
+  user_id: String!
+  withdraw_log: withdraw_logCreateManyWithoutUserInput
+}
+
+input userWhereUniqueInput {
+  email: String
+  id: Int
+  user_id: String
+}
+
+input withdraw_logCreateManyWithoutUserInput {
+  connect: [withdraw_logWhereUniqueInput!]
+  create: [withdraw_logCreateWithoutUserInput!]
+}
+
+input withdraw_logCreateWithoutUserInput {
+  withdraw_ip: String!
+  withdraw_time: DateTime!
+}
+
+input withdraw_logWhereUniqueInput {
+  id: Int
+  user_pk: Int
 }

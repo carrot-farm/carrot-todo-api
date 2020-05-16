@@ -1,13 +1,15 @@
 import { nexusPrismaPlugin } from 'nexus-prisma';
 import { makeSchema, objectType } from '@nexus/schema';
 import user from './models/user';
+import todo_category from './models/todo_category';
+import todo from './models/todo';
 import Query from './Query';
 import Mutation from './Mutation';
 
 
 // ===== 스키마 생성
 export const schema = makeSchema({
-  types: [user, Query, Mutation],
+  types: [Query, Mutation, user, todo_category, todo],
   plugins: [nexusPrismaPlugin()],
   outputs: {
     schema: `${process.env.PWD}/src/schema/schema.graphql`,

@@ -20,23 +20,23 @@ const {
 
 
 // ===== jwt 인증 전략
-const useJWT = () => {
-  const { Strategy, ExtractJwt } = JWTPassport;
+// const useJWT = () => {
+//   const { Strategy, ExtractJwt } = JWTPassport;
 
-  passport.use(
-    "jwt",
-    new Strategy(
-      {
-        jwtFromRequest: ExtractJwt.fromHeader("Authorization"), // 토큰의 헤더 지정.
-        secretOrKey: tokenSecret
-      },
-      (payload, done) => {
-        // console.log('> jwt : ')
-        done(null, payload);
-      }
-    )
-  );
-};
+//   passport.use(
+//     "jwt",
+//     new Strategy(
+//       {
+//         jwtFromRequest: ExtractJwt.fromHeader("Authorization"), // 토큰의 헤더 지정.
+//         secretOrKey: tokenSecret
+//       },
+//       (payload, done) => {
+//         // console.log('> jwt : ')
+//         done(null, payload);
+//       }
+//     )
+//   );
+// };
 
 // ===== google 인증 전략
 const useGoogle = () => {
@@ -69,7 +69,7 @@ const useGoogle = () => {
 const passportMiddleware = (app: express.Application) => {
   app.use(passport.initialize());
 
-  useJWT();
+  // useJWT();
   useGoogle();
 };
 

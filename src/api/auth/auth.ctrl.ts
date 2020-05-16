@@ -22,7 +22,7 @@ export const googleLoginCallback = (
 ) => {  
 
   passport.authenticate('google', async (_, data: AuthenticateType, error) => {
-    console.log('> ===== 2 : ', data);
+    // console.log('> ===== 2 : ', data);
     const clientIp = getIp(req);
     let user;
     try {
@@ -35,7 +35,7 @@ export const googleLoginCallback = (
           id: true
         }
       });
-      console.log('> user : ', user);
+      // console.log('> user : ', user);
 
       if (!user) {
         // # 유저 정보 등록
@@ -63,7 +63,7 @@ export const googleLoginCallback = (
             }
           }
         })
-        console.log('> signup : ', user)
+        // console.log('> signup : ', user)
       }
 
       // # 토큰 생성
@@ -78,14 +78,3 @@ export const googleLoginCallback = (
   })(req, res);
 };
 
-// ===== 완료
-export const complete = (res: express.Response, data = {}) => {
-  const sendData = {
-    type: "login",
-    ...data
-  };
-  res.send(`<script>
-      window.opener.postMessage(${JSON.stringify(sendData)}, "*");
-      window.close();
-   </script>`);
-};

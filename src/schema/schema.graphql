@@ -4,6 +4,28 @@
 
 scalar DateTime
 
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
 input login_logCreateManyWithoutUserInput {
   connect: [login_logWhereUniqueInput!]
   create: [login_logCreateWithoutUserInput!]
@@ -14,14 +36,99 @@ input login_logCreateWithoutUserInput {
   login_time: DateTime
 }
 
+input login_logFilter {
+  every: login_logWhereInput
+  none: login_logWhereInput
+  some: login_logWhereInput
+}
+
+input login_logScalarWhereInput {
+  AND: [login_logScalarWhereInput!]
+  id: IntFilter
+  login_ip: StringFilter
+  login_time: DateTimeFilter
+  NOT: [login_logScalarWhereInput!]
+  OR: [login_logScalarWhereInput!]
+  user_pk: IntFilter
+}
+
+input login_logUpdateManyDataInput {
+  id: Int
+  login_ip: String
+  login_time: DateTime
+}
+
+input login_logUpdateManyWithoutUserInput {
+  connect: [login_logWhereUniqueInput!]
+  create: [login_logCreateWithoutUserInput!]
+  delete: [login_logWhereUniqueInput!]
+  deleteMany: [login_logScalarWhereInput!]
+  disconnect: [login_logWhereUniqueInput!]
+  set: [login_logWhereUniqueInput!]
+  update: [login_logUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [login_logUpdateManyWithWhereNestedInput!]
+  upsert: [login_logUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input login_logUpdateManyWithWhereNestedInput {
+  data: login_logUpdateManyDataInput!
+  where: login_logScalarWhereInput!
+}
+
+input login_logUpdateWithoutUserDataInput {
+  id: Int
+  login_ip: String
+  login_time: DateTime
+}
+
+input login_logUpdateWithWhereUniqueWithoutUserInput {
+  data: login_logUpdateWithoutUserDataInput!
+  where: login_logWhereUniqueInput!
+}
+
+input login_logUpsertWithWhereUniqueWithoutUserInput {
+  create: login_logCreateWithoutUserInput!
+  update: login_logUpdateWithoutUserDataInput!
+  where: login_logWhereUniqueInput!
+}
+
+input login_logWhereInput {
+  AND: [login_logWhereInput!]
+  id: IntFilter
+  login_ip: StringFilter
+  login_time: DateTimeFilter
+  NOT: [login_logWhereInput!]
+  OR: [login_logWhereInput!]
+  user: userWhereInput
+  user_pk: IntFilter
+}
+
 input login_logWhereUniqueInput {
   id: Int
   user_pk: Int
 }
 
 type Mutation {
+  createOnetodo(data: todoCreateInput!): todo!
+  createOnetodo_category(data: todo_categoryCreateInput!): todo_category!
   createOneuser(data: userCreateInput!): user!
-  signup(email: String!): user!
+  tt(user_id: String): user!
+  updateOnetodo(data: todoUpdateInput!, where: todoWhereUniqueInput!): todo
+  updateOnetodo_category(data: todo_categoryUpdateInput!, where: todo_categoryWhereUniqueInput!): todo_category
+}
+
+input NullableStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: String
+  notIn: [String!]
+  startsWith: String
 }
 
 input oauthCreateManyWithoutUserInput {
@@ -34,14 +141,92 @@ input oauthCreateWithoutUserInput {
   provider: String!
 }
 
+input oauthFilter {
+  every: oauthWhereInput
+  none: oauthWhereInput
+  some: oauthWhereInput
+}
+
+input oauthScalarWhereInput {
+  access_token: StringFilter
+  AND: [oauthScalarWhereInput!]
+  id: IntFilter
+  NOT: [oauthScalarWhereInput!]
+  OR: [oauthScalarWhereInput!]
+  provider: StringFilter
+  user_pk: IntFilter
+}
+
+input oauthUpdateManyDataInput {
+  access_token: String
+  id: Int
+  provider: String
+}
+
+input oauthUpdateManyWithoutUserInput {
+  connect: [oauthWhereUniqueInput!]
+  create: [oauthCreateWithoutUserInput!]
+  delete: [oauthWhereUniqueInput!]
+  deleteMany: [oauthScalarWhereInput!]
+  disconnect: [oauthWhereUniqueInput!]
+  set: [oauthWhereUniqueInput!]
+  update: [oauthUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [oauthUpdateManyWithWhereNestedInput!]
+  upsert: [oauthUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input oauthUpdateManyWithWhereNestedInput {
+  data: oauthUpdateManyDataInput!
+  where: oauthScalarWhereInput!
+}
+
+input oauthUpdateWithoutUserDataInput {
+  access_token: String
+  id: Int
+  provider: String
+}
+
+input oauthUpdateWithWhereUniqueWithoutUserInput {
+  data: oauthUpdateWithoutUserDataInput!
+  where: oauthWhereUniqueInput!
+}
+
+input oauthUpsertWithWhereUniqueWithoutUserInput {
+  create: oauthCreateWithoutUserInput!
+  update: oauthUpdateWithoutUserDataInput!
+  where: oauthWhereUniqueInput!
+}
+
+input oauthWhereInput {
+  access_token: StringFilter
+  AND: [oauthWhereInput!]
+  id: IntFilter
+  NOT: [oauthWhereInput!]
+  OR: [oauthWhereInput!]
+  provider: StringFilter
+  user: userWhereInput
+  user_pk: IntFilter
+}
+
 input oauthWhereUniqueInput {
   id: Int
   user_pk: Int
 }
 
+enum OrderByArg {
+  asc
+  desc
+}
+
 type Query {
   """테스트"""
   info: String!
+  test: String!
+  todo(where: todoWhereUniqueInput!): todo
+  todoCategories(after: todo_categoryWhereUniqueInput, before: todo_categoryWhereUniqueInput, first: Int, last: Int, skip: Int): [todo_category!]!
+  todoCategory(where: todo_categoryWhereUniqueInput!): todo_category
+  todos(after: todoWhereUniqueInput, before: todoWhereUniqueInput, first: Int, last: Int, orderBy: todoOrderByInput, skip: Int, where: todoWhereInput): [todo!]!
+  user(where: userWhereUniqueInput!): user
   users(after: userWhereUniqueInput, before: userWhereUniqueInput, first: Int, last: Int, skip: Int): [user!]!
 }
 
@@ -55,9 +240,110 @@ input register_logCreateWithoutUserInput {
   register_time: DateTime
 }
 
+input register_logFilter {
+  every: register_logWhereInput
+  none: register_logWhereInput
+  some: register_logWhereInput
+}
+
+input register_logScalarWhereInput {
+  AND: [register_logScalarWhereInput!]
+  id: IntFilter
+  NOT: [register_logScalarWhereInput!]
+  OR: [register_logScalarWhereInput!]
+  register_ip: StringFilter
+  register_time: DateTimeFilter
+  user_pk: IntFilter
+}
+
+input register_logUpdateManyDataInput {
+  id: Int
+  register_ip: String
+  register_time: DateTime
+}
+
+input register_logUpdateManyWithoutUserInput {
+  connect: [register_logWhereUniqueInput!]
+  create: [register_logCreateWithoutUserInput!]
+  delete: [register_logWhereUniqueInput!]
+  deleteMany: [register_logScalarWhereInput!]
+  disconnect: [register_logWhereUniqueInput!]
+  set: [register_logWhereUniqueInput!]
+  update: [register_logUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [register_logUpdateManyWithWhereNestedInput!]
+  upsert: [register_logUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input register_logUpdateManyWithWhereNestedInput {
+  data: register_logUpdateManyDataInput!
+  where: register_logScalarWhereInput!
+}
+
+input register_logUpdateWithoutUserDataInput {
+  id: Int
+  register_ip: String
+  register_time: DateTime
+}
+
+input register_logUpdateWithWhereUniqueWithoutUserInput {
+  data: register_logUpdateWithoutUserDataInput!
+  where: register_logWhereUniqueInput!
+}
+
+input register_logUpsertWithWhereUniqueWithoutUserInput {
+  create: register_logCreateWithoutUserInput!
+  update: register_logUpdateWithoutUserDataInput!
+  where: register_logWhereUniqueInput!
+}
+
+input register_logWhereInput {
+  AND: [register_logWhereInput!]
+  id: IntFilter
+  NOT: [register_logWhereInput!]
+  OR: [register_logWhereInput!]
+  register_ip: StringFilter
+  register_time: DateTimeFilter
+  user: userWhereInput
+  user_pk: IntFilter
+}
+
 input register_logWhereUniqueInput {
   id: Int
   user_pk: Int
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type todo {
+  id: Int!
+  is_completed: Int!
+  todo: String
+  todo_category: todo_category!
+}
+
+type todo_category {
+  category: String!
+  id: Int!
+}
+
+input todo_categoryCreateInput {
+  category: String!
+  created_time: DateTime
+  todo: todoCreateManyWithoutTodo_categoryInput
+  updated_time: DateTime
+  user: userCreateOneWithoutTodo_categoryInput!
 }
 
 input todo_categoryCreateManyWithoutUserInput {
@@ -72,17 +358,133 @@ input todo_categoryCreateOneWithoutTodoInput {
 
 input todo_categoryCreateWithoutTodoInput {
   category: String!
+  created_time: DateTime
+  updated_time: DateTime
   user: userCreateOneWithoutTodo_categoryInput!
 }
 
 input todo_categoryCreateWithoutUserInput {
   category: String!
+  created_time: DateTime
   todo: todoCreateManyWithoutTodo_categoryInput
+  updated_time: DateTime
+}
+
+input todo_categoryFilter {
+  every: todo_categoryWhereInput
+  none: todo_categoryWhereInput
+  some: todo_categoryWhereInput
+}
+
+input todo_categoryScalarWhereInput {
+  AND: [todo_categoryScalarWhereInput!]
+  category: StringFilter
+  created_time: DateTimeFilter
+  id: IntFilter
+  NOT: [todo_categoryScalarWhereInput!]
+  OR: [todo_categoryScalarWhereInput!]
+  todo: todoFilter
+  updated_time: DateTimeFilter
+  user_pk: IntFilter
+}
+
+input todo_categoryUpdateInput {
+  category: String
+  created_time: DateTime
+  id: Int
+  todo: todoUpdateManyWithoutTodo_categoryInput
+  updated_time: DateTime
+  user: userUpdateOneRequiredWithoutTodo_categoryInput
+}
+
+input todo_categoryUpdateManyDataInput {
+  category: String
+  created_time: DateTime
+  id: Int
+  updated_time: DateTime
+}
+
+input todo_categoryUpdateManyWithoutUserInput {
+  connect: [todo_categoryWhereUniqueInput!]
+  create: [todo_categoryCreateWithoutUserInput!]
+  delete: [todo_categoryWhereUniqueInput!]
+  deleteMany: [todo_categoryScalarWhereInput!]
+  disconnect: [todo_categoryWhereUniqueInput!]
+  set: [todo_categoryWhereUniqueInput!]
+  update: [todo_categoryUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [todo_categoryUpdateManyWithWhereNestedInput!]
+  upsert: [todo_categoryUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input todo_categoryUpdateManyWithWhereNestedInput {
+  data: todo_categoryUpdateManyDataInput!
+  where: todo_categoryScalarWhereInput!
+}
+
+input todo_categoryUpdateOneRequiredWithoutTodoInput {
+  connect: todo_categoryWhereUniqueInput
+  create: todo_categoryCreateWithoutTodoInput
+  update: todo_categoryUpdateWithoutTodoDataInput
+  upsert: todo_categoryUpsertWithoutTodoInput
+}
+
+input todo_categoryUpdateWithoutTodoDataInput {
+  category: String
+  created_time: DateTime
+  id: Int
+  updated_time: DateTime
+  user: userUpdateOneRequiredWithoutTodo_categoryInput
+}
+
+input todo_categoryUpdateWithoutUserDataInput {
+  category: String
+  created_time: DateTime
+  id: Int
+  todo: todoUpdateManyWithoutTodo_categoryInput
+  updated_time: DateTime
+}
+
+input todo_categoryUpdateWithWhereUniqueWithoutUserInput {
+  data: todo_categoryUpdateWithoutUserDataInput!
+  where: todo_categoryWhereUniqueInput!
+}
+
+input todo_categoryUpsertWithoutTodoInput {
+  create: todo_categoryCreateWithoutTodoInput!
+  update: todo_categoryUpdateWithoutTodoDataInput!
+}
+
+input todo_categoryUpsertWithWhereUniqueWithoutUserInput {
+  create: todo_categoryCreateWithoutUserInput!
+  update: todo_categoryUpdateWithoutUserDataInput!
+  where: todo_categoryWhereUniqueInput!
+}
+
+input todo_categoryWhereInput {
+  AND: [todo_categoryWhereInput!]
+  category: StringFilter
+  created_time: DateTimeFilter
+  id: IntFilter
+  NOT: [todo_categoryWhereInput!]
+  OR: [todo_categoryWhereInput!]
+  todo: todoFilter
+  updated_time: DateTimeFilter
+  user: userWhereInput
+  user_pk: IntFilter
 }
 
 input todo_categoryWhereUniqueInput {
   id: Int
   user_pk: Int
+}
+
+input todoCreateInput {
+  created_time: DateTime
+  is_completed: Int
+  todo: String
+  todo_category: todo_categoryCreateOneWithoutTodoInput!
+  updated_time: DateTime
+  user: userCreateOneWithoutTodoInput!
 }
 
 input todoCreateManyWithoutTodo_categoryInput {
@@ -96,15 +498,150 @@ input todoCreateManyWithoutUserInput {
 }
 
 input todoCreateWithoutTodo_categoryInput {
-  is_completed: Int!
+  created_time: DateTime
+  is_completed: Int
   todo: String
+  updated_time: DateTime
   user: userCreateOneWithoutTodoInput!
 }
 
 input todoCreateWithoutUserInput {
-  is_completed: Int!
+  created_time: DateTime
+  is_completed: Int
   todo: String
   todo_category: todo_categoryCreateOneWithoutTodoInput!
+  updated_time: DateTime
+}
+
+input todoFilter {
+  every: todoWhereInput
+  none: todoWhereInput
+  some: todoWhereInput
+}
+
+input todoOrderByInput {
+  created_time: OrderByArg
+  id: OrderByArg
+  is_completed: OrderByArg
+  todo: OrderByArg
+  todo_category_pk: OrderByArg
+  updated_time: OrderByArg
+  user_pk: OrderByArg
+}
+
+input todoScalarWhereInput {
+  AND: [todoScalarWhereInput!]
+  created_time: DateTimeFilter
+  id: IntFilter
+  is_completed: IntFilter
+  NOT: [todoScalarWhereInput!]
+  OR: [todoScalarWhereInput!]
+  todo: NullableStringFilter
+  todo_category_pk: IntFilter
+  updated_time: DateTimeFilter
+  user_pk: IntFilter
+}
+
+input todoUpdateInput {
+  created_time: DateTime
+  id: Int
+  is_completed: Int
+  todo: String
+  todo_category: todo_categoryUpdateOneRequiredWithoutTodoInput
+  updated_time: DateTime
+  user: userUpdateOneRequiredWithoutTodoInput
+}
+
+input todoUpdateManyDataInput {
+  created_time: DateTime
+  id: Int
+  is_completed: Int
+  todo: String
+  updated_time: DateTime
+}
+
+input todoUpdateManyWithoutTodo_categoryInput {
+  connect: [todoWhereUniqueInput!]
+  create: [todoCreateWithoutTodo_categoryInput!]
+  delete: [todoWhereUniqueInput!]
+  deleteMany: [todoScalarWhereInput!]
+  disconnect: [todoWhereUniqueInput!]
+  set: [todoWhereUniqueInput!]
+  update: [todoUpdateWithWhereUniqueWithoutTodo_categoryInput!]
+  updateMany: [todoUpdateManyWithWhereNestedInput!]
+  upsert: [todoUpsertWithWhereUniqueWithoutTodo_categoryInput!]
+}
+
+input todoUpdateManyWithoutUserInput {
+  connect: [todoWhereUniqueInput!]
+  create: [todoCreateWithoutUserInput!]
+  delete: [todoWhereUniqueInput!]
+  deleteMany: [todoScalarWhereInput!]
+  disconnect: [todoWhereUniqueInput!]
+  set: [todoWhereUniqueInput!]
+  update: [todoUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [todoUpdateManyWithWhereNestedInput!]
+  upsert: [todoUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input todoUpdateManyWithWhereNestedInput {
+  data: todoUpdateManyDataInput!
+  where: todoScalarWhereInput!
+}
+
+input todoUpdateWithoutTodo_categoryDataInput {
+  created_time: DateTime
+  id: Int
+  is_completed: Int
+  todo: String
+  updated_time: DateTime
+  user: userUpdateOneRequiredWithoutTodoInput
+}
+
+input todoUpdateWithoutUserDataInput {
+  created_time: DateTime
+  id: Int
+  is_completed: Int
+  todo: String
+  todo_category: todo_categoryUpdateOneRequiredWithoutTodoInput
+  updated_time: DateTime
+}
+
+input todoUpdateWithWhereUniqueWithoutTodo_categoryInput {
+  data: todoUpdateWithoutTodo_categoryDataInput!
+  where: todoWhereUniqueInput!
+}
+
+input todoUpdateWithWhereUniqueWithoutUserInput {
+  data: todoUpdateWithoutUserDataInput!
+  where: todoWhereUniqueInput!
+}
+
+input todoUpsertWithWhereUniqueWithoutTodo_categoryInput {
+  create: todoCreateWithoutTodo_categoryInput!
+  update: todoUpdateWithoutTodo_categoryDataInput!
+  where: todoWhereUniqueInput!
+}
+
+input todoUpsertWithWhereUniqueWithoutUserInput {
+  create: todoCreateWithoutUserInput!
+  update: todoUpdateWithoutUserDataInput!
+  where: todoWhereUniqueInput!
+}
+
+input todoWhereInput {
+  AND: [todoWhereInput!]
+  created_time: DateTimeFilter
+  id: IntFilter
+  is_completed: IntFilter
+  NOT: [todoWhereInput!]
+  OR: [todoWhereInput!]
+  todo: NullableStringFilter
+  todo_category: todo_categoryWhereInput
+  todo_category_pk: IntFilter
+  updated_time: DateTimeFilter
+  user: userWhereInput
+  user_pk: IntFilter
 }
 
 input todoWhereUniqueInput {
@@ -116,8 +653,9 @@ input todoWhereUniqueInput {
 type user {
   email: String!
   id: Int!
-  is_block: Int
-  is_withdraw: Int
+  is_block: Int!
+  is_verify: Int!
+  is_withdraw: Int!
   password: String!
   password_salt: String!
   user_id: String!
@@ -179,6 +717,82 @@ input userCreateWithoutTodoInput {
   withdraw_log: withdraw_logCreateManyWithoutUserInput
 }
 
+input userUpdateOneRequiredWithoutTodo_categoryInput {
+  connect: userWhereUniqueInput
+  create: userCreateWithoutTodo_categoryInput
+  update: userUpdateWithoutTodo_categoryDataInput
+  upsert: userUpsertWithoutTodo_categoryInput
+}
+
+input userUpdateOneRequiredWithoutTodoInput {
+  connect: userWhereUniqueInput
+  create: userCreateWithoutTodoInput
+  update: userUpdateWithoutTodoDataInput
+  upsert: userUpsertWithoutTodoInput
+}
+
+input userUpdateWithoutTodo_categoryDataInput {
+  email: String
+  id: Int
+  is_block: Int
+  is_verify: Int
+  is_withdraw: Int
+  login_log: login_logUpdateManyWithoutUserInput
+  oauth: oauthUpdateManyWithoutUserInput
+  password: String
+  password_salt: String
+  register_log: register_logUpdateManyWithoutUserInput
+  todo: todoUpdateManyWithoutUserInput
+  user_id: String
+  withdraw_log: withdraw_logUpdateManyWithoutUserInput
+}
+
+input userUpdateWithoutTodoDataInput {
+  email: String
+  id: Int
+  is_block: Int
+  is_verify: Int
+  is_withdraw: Int
+  login_log: login_logUpdateManyWithoutUserInput
+  oauth: oauthUpdateManyWithoutUserInput
+  password: String
+  password_salt: String
+  register_log: register_logUpdateManyWithoutUserInput
+  todo_category: todo_categoryUpdateManyWithoutUserInput
+  user_id: String
+  withdraw_log: withdraw_logUpdateManyWithoutUserInput
+}
+
+input userUpsertWithoutTodo_categoryInput {
+  create: userCreateWithoutTodo_categoryInput!
+  update: userUpdateWithoutTodo_categoryDataInput!
+}
+
+input userUpsertWithoutTodoInput {
+  create: userCreateWithoutTodoInput!
+  update: userUpdateWithoutTodoDataInput!
+}
+
+input userWhereInput {
+  AND: [userWhereInput!]
+  email: StringFilter
+  id: IntFilter
+  is_block: IntFilter
+  is_verify: IntFilter
+  is_withdraw: IntFilter
+  login_log: login_logFilter
+  NOT: [userWhereInput!]
+  oauth: oauthFilter
+  OR: [userWhereInput!]
+  password: StringFilter
+  password_salt: StringFilter
+  register_log: register_logFilter
+  todo: todoFilter
+  todo_category: todo_categoryFilter
+  user_id: StringFilter
+  withdraw_log: withdraw_logFilter
+}
+
 input userWhereUniqueInput {
   email: String
   id: Int
@@ -192,7 +806,74 @@ input withdraw_logCreateManyWithoutUserInput {
 
 input withdraw_logCreateWithoutUserInput {
   withdraw_ip: String!
-  withdraw_time: DateTime!
+  withdraw_time: DateTime
+}
+
+input withdraw_logFilter {
+  every: withdraw_logWhereInput
+  none: withdraw_logWhereInput
+  some: withdraw_logWhereInput
+}
+
+input withdraw_logScalarWhereInput {
+  AND: [withdraw_logScalarWhereInput!]
+  id: IntFilter
+  NOT: [withdraw_logScalarWhereInput!]
+  OR: [withdraw_logScalarWhereInput!]
+  user_pk: IntFilter
+  withdraw_ip: StringFilter
+  withdraw_time: DateTimeFilter
+}
+
+input withdraw_logUpdateManyDataInput {
+  id: Int
+  withdraw_ip: String
+  withdraw_time: DateTime
+}
+
+input withdraw_logUpdateManyWithoutUserInput {
+  connect: [withdraw_logWhereUniqueInput!]
+  create: [withdraw_logCreateWithoutUserInput!]
+  delete: [withdraw_logWhereUniqueInput!]
+  deleteMany: [withdraw_logScalarWhereInput!]
+  disconnect: [withdraw_logWhereUniqueInput!]
+  set: [withdraw_logWhereUniqueInput!]
+  update: [withdraw_logUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [withdraw_logUpdateManyWithWhereNestedInput!]
+  upsert: [withdraw_logUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input withdraw_logUpdateManyWithWhereNestedInput {
+  data: withdraw_logUpdateManyDataInput!
+  where: withdraw_logScalarWhereInput!
+}
+
+input withdraw_logUpdateWithoutUserDataInput {
+  id: Int
+  withdraw_ip: String
+  withdraw_time: DateTime
+}
+
+input withdraw_logUpdateWithWhereUniqueWithoutUserInput {
+  data: withdraw_logUpdateWithoutUserDataInput!
+  where: withdraw_logWhereUniqueInput!
+}
+
+input withdraw_logUpsertWithWhereUniqueWithoutUserInput {
+  create: withdraw_logCreateWithoutUserInput!
+  update: withdraw_logUpdateWithoutUserDataInput!
+  where: withdraw_logWhereUniqueInput!
+}
+
+input withdraw_logWhereInput {
+  AND: [withdraw_logWhereInput!]
+  id: IntFilter
+  NOT: [withdraw_logWhereInput!]
+  OR: [withdraw_logWhereInput!]
+  user: userWhereInput
+  user_pk: IntFilter
+  withdraw_ip: StringFilter
+  withdraw_time: DateTimeFilter
 }
 
 input withdraw_logWhereUniqueInput {

@@ -38,10 +38,12 @@ model register_log {
 }
 
 model todo {
+  created_time     DateTime      @default(now())
   id               Int           @default(autoincrement()) @id
-  is_completed     Int
+  is_completed     Int           @default(0)
   todo             String?
   todo_category_pk Int
+  updated_time     DateTime      @default(now())
   user_pk          Int
   todo_category    todo_category @relation(fields: [todo_category_pk], references: [id])
   user             user          @relation(fields: [user_pk], references: [id])
@@ -51,11 +53,13 @@ model todo {
 }
 
 model todo_category {
-  category String
-  id       Int    @default(autoincrement()) @id
-  user_pk  Int
-  user     user   @relation(fields: [user_pk], references: [id])
-  todo     todo[]
+  category     String
+  created_time DateTime @default(now())
+  id           Int      @default(autoincrement()) @id
+  updated_time DateTime @default(now())
+  user_pk      Int
+  user         user     @relation(fields: [user_pk], references: [id])
+  todo         todo[]
 
   @@index([user_pk], name: "FK_todo_category_user_pk_user_id")
 }
@@ -63,9 +67,9 @@ model todo_category {
 model user {
   email         String          @unique
   id            Int             @default(autoincrement()) @id
-  is_block      Int?             @default(0)
-  is_verify     Int?             @default(0)
-  is_withdraw   Int?             @default(0)
+  is_block      Int             @default(0)
+  is_verify     Int             @default(0)
+  is_withdraw   Int             @default(0)
   password      String
   password_salt String
   user_id       String          @unique
@@ -81,7 +85,7 @@ model withdraw_log {
   id            Int      @default(autoincrement()) @id
   user_pk       Int
   withdraw_ip   String
-  withdraw_time DateTime
+  withdraw_time DateTime @default(now())
   user          user     @relation(fields: [user_pk], references: [id])
 
   @@index([user_pk], name: "FK_withdraw_log_user_pk_user_id")

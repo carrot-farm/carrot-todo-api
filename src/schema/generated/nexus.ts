@@ -19,6 +19,52 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  DateTimeFilter: { // input type
+    equals?: any | null; // DateTime
+    gt?: any | null; // DateTime
+    gte?: any | null; // DateTime
+    in?: any[] | null; // [DateTime!]
+    lt?: any | null; // DateTime
+    lte?: any | null; // DateTime
+    not?: any | null; // DateTime
+    notIn?: any[] | null; // [DateTime!]
+  }
+  IntFilter: { // input type
+    equals?: number | null; // Int
+    gt?: number | null; // Int
+    gte?: number | null; // Int
+    in?: number[] | null; // [Int!]
+    lt?: number | null; // Int
+    lte?: number | null; // Int
+    not?: number | null; // Int
+    notIn?: number[] | null; // [Int!]
+  }
+  NullableStringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: string | null; // String
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  StringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: string | null; // String
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
   login_logCreateManyWithoutUserInput: { // input type
     connect?: NexusGenInputs['login_logWhereUniqueInput'][] | null; // [login_logWhereUniqueInput!]
     create?: NexusGenInputs['login_logCreateWithoutUserInput'][] | null; // [login_logCreateWithoutUserInput!]
@@ -26,6 +72,64 @@ export interface NexusGenInputs {
   login_logCreateWithoutUserInput: { // input type
     login_ip: string; // String!
     login_time?: any | null; // DateTime
+  }
+  login_logFilter: { // input type
+    every?: NexusGenInputs['login_logWhereInput'] | null; // login_logWhereInput
+    none?: NexusGenInputs['login_logWhereInput'] | null; // login_logWhereInput
+    some?: NexusGenInputs['login_logWhereInput'] | null; // login_logWhereInput
+  }
+  login_logScalarWhereInput: { // input type
+    AND?: NexusGenInputs['login_logScalarWhereInput'][] | null; // [login_logScalarWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    login_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    login_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    NOT?: NexusGenInputs['login_logScalarWhereInput'][] | null; // [login_logScalarWhereInput!]
+    OR?: NexusGenInputs['login_logScalarWhereInput'][] | null; // [login_logScalarWhereInput!]
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  login_logUpdateManyDataInput: { // input type
+    id?: number | null; // Int
+    login_ip?: string | null; // String
+    login_time?: any | null; // DateTime
+  }
+  login_logUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['login_logUpdateManyDataInput']; // login_logUpdateManyDataInput!
+    where: NexusGenInputs['login_logScalarWhereInput']; // login_logScalarWhereInput!
+  }
+  login_logUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['login_logWhereUniqueInput'][] | null; // [login_logWhereUniqueInput!]
+    create?: NexusGenInputs['login_logCreateWithoutUserInput'][] | null; // [login_logCreateWithoutUserInput!]
+    delete?: NexusGenInputs['login_logWhereUniqueInput'][] | null; // [login_logWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['login_logScalarWhereInput'][] | null; // [login_logScalarWhereInput!]
+    disconnect?: NexusGenInputs['login_logWhereUniqueInput'][] | null; // [login_logWhereUniqueInput!]
+    set?: NexusGenInputs['login_logWhereUniqueInput'][] | null; // [login_logWhereUniqueInput!]
+    update?: NexusGenInputs['login_logUpdateWithWhereUniqueWithoutUserInput'][] | null; // [login_logUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['login_logUpdateManyWithWhereNestedInput'][] | null; // [login_logUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['login_logUpsertWithWhereUniqueWithoutUserInput'][] | null; // [login_logUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  login_logUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['login_logUpdateWithoutUserDataInput']; // login_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['login_logWhereUniqueInput']; // login_logWhereUniqueInput!
+  }
+  login_logUpdateWithoutUserDataInput: { // input type
+    id?: number | null; // Int
+    login_ip?: string | null; // String
+    login_time?: any | null; // DateTime
+  }
+  login_logUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['login_logCreateWithoutUserInput']; // login_logCreateWithoutUserInput!
+    update: NexusGenInputs['login_logUpdateWithoutUserDataInput']; // login_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['login_logWhereUniqueInput']; // login_logWhereUniqueInput!
+  }
+  login_logWhereInput: { // input type
+    AND?: NexusGenInputs['login_logWhereInput'][] | null; // [login_logWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    login_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    login_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    NOT?: NexusGenInputs['login_logWhereInput'][] | null; // [login_logWhereInput!]
+    OR?: NexusGenInputs['login_logWhereInput'][] | null; // [login_logWhereInput!]
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
   }
   login_logWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -39,6 +143,64 @@ export interface NexusGenInputs {
     access_token: string; // String!
     provider: string; // String!
   }
+  oauthFilter: { // input type
+    every?: NexusGenInputs['oauthWhereInput'] | null; // oauthWhereInput
+    none?: NexusGenInputs['oauthWhereInput'] | null; // oauthWhereInput
+    some?: NexusGenInputs['oauthWhereInput'] | null; // oauthWhereInput
+  }
+  oauthScalarWhereInput: { // input type
+    access_token?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    AND?: NexusGenInputs['oauthScalarWhereInput'][] | null; // [oauthScalarWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['oauthScalarWhereInput'][] | null; // [oauthScalarWhereInput!]
+    OR?: NexusGenInputs['oauthScalarWhereInput'][] | null; // [oauthScalarWhereInput!]
+    provider?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  oauthUpdateManyDataInput: { // input type
+    access_token?: string | null; // String
+    id?: number | null; // Int
+    provider?: string | null; // String
+  }
+  oauthUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['oauthUpdateManyDataInput']; // oauthUpdateManyDataInput!
+    where: NexusGenInputs['oauthScalarWhereInput']; // oauthScalarWhereInput!
+  }
+  oauthUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['oauthWhereUniqueInput'][] | null; // [oauthWhereUniqueInput!]
+    create?: NexusGenInputs['oauthCreateWithoutUserInput'][] | null; // [oauthCreateWithoutUserInput!]
+    delete?: NexusGenInputs['oauthWhereUniqueInput'][] | null; // [oauthWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['oauthScalarWhereInput'][] | null; // [oauthScalarWhereInput!]
+    disconnect?: NexusGenInputs['oauthWhereUniqueInput'][] | null; // [oauthWhereUniqueInput!]
+    set?: NexusGenInputs['oauthWhereUniqueInput'][] | null; // [oauthWhereUniqueInput!]
+    update?: NexusGenInputs['oauthUpdateWithWhereUniqueWithoutUserInput'][] | null; // [oauthUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['oauthUpdateManyWithWhereNestedInput'][] | null; // [oauthUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['oauthUpsertWithWhereUniqueWithoutUserInput'][] | null; // [oauthUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  oauthUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['oauthUpdateWithoutUserDataInput']; // oauthUpdateWithoutUserDataInput!
+    where: NexusGenInputs['oauthWhereUniqueInput']; // oauthWhereUniqueInput!
+  }
+  oauthUpdateWithoutUserDataInput: { // input type
+    access_token?: string | null; // String
+    id?: number | null; // Int
+    provider?: string | null; // String
+  }
+  oauthUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['oauthCreateWithoutUserInput']; // oauthCreateWithoutUserInput!
+    update: NexusGenInputs['oauthUpdateWithoutUserDataInput']; // oauthUpdateWithoutUserDataInput!
+    where: NexusGenInputs['oauthWhereUniqueInput']; // oauthWhereUniqueInput!
+  }
+  oauthWhereInput: { // input type
+    access_token?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    AND?: NexusGenInputs['oauthWhereInput'][] | null; // [oauthWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['oauthWhereInput'][] | null; // [oauthWhereInput!]
+    OR?: NexusGenInputs['oauthWhereInput'][] | null; // [oauthWhereInput!]
+    provider?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
   oauthWhereUniqueInput: { // input type
     id?: number | null; // Int
     user_pk?: number | null; // Int
@@ -51,9 +213,75 @@ export interface NexusGenInputs {
     register_ip: string; // String!
     register_time?: any | null; // DateTime
   }
+  register_logFilter: { // input type
+    every?: NexusGenInputs['register_logWhereInput'] | null; // register_logWhereInput
+    none?: NexusGenInputs['register_logWhereInput'] | null; // register_logWhereInput
+    some?: NexusGenInputs['register_logWhereInput'] | null; // register_logWhereInput
+  }
+  register_logScalarWhereInput: { // input type
+    AND?: NexusGenInputs['register_logScalarWhereInput'][] | null; // [register_logScalarWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['register_logScalarWhereInput'][] | null; // [register_logScalarWhereInput!]
+    OR?: NexusGenInputs['register_logScalarWhereInput'][] | null; // [register_logScalarWhereInput!]
+    register_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    register_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  register_logUpdateManyDataInput: { // input type
+    id?: number | null; // Int
+    register_ip?: string | null; // String
+    register_time?: any | null; // DateTime
+  }
+  register_logUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['register_logUpdateManyDataInput']; // register_logUpdateManyDataInput!
+    where: NexusGenInputs['register_logScalarWhereInput']; // register_logScalarWhereInput!
+  }
+  register_logUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['register_logWhereUniqueInput'][] | null; // [register_logWhereUniqueInput!]
+    create?: NexusGenInputs['register_logCreateWithoutUserInput'][] | null; // [register_logCreateWithoutUserInput!]
+    delete?: NexusGenInputs['register_logWhereUniqueInput'][] | null; // [register_logWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['register_logScalarWhereInput'][] | null; // [register_logScalarWhereInput!]
+    disconnect?: NexusGenInputs['register_logWhereUniqueInput'][] | null; // [register_logWhereUniqueInput!]
+    set?: NexusGenInputs['register_logWhereUniqueInput'][] | null; // [register_logWhereUniqueInput!]
+    update?: NexusGenInputs['register_logUpdateWithWhereUniqueWithoutUserInput'][] | null; // [register_logUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['register_logUpdateManyWithWhereNestedInput'][] | null; // [register_logUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['register_logUpsertWithWhereUniqueWithoutUserInput'][] | null; // [register_logUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  register_logUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['register_logUpdateWithoutUserDataInput']; // register_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['register_logWhereUniqueInput']; // register_logWhereUniqueInput!
+  }
+  register_logUpdateWithoutUserDataInput: { // input type
+    id?: number | null; // Int
+    register_ip?: string | null; // String
+    register_time?: any | null; // DateTime
+  }
+  register_logUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['register_logCreateWithoutUserInput']; // register_logCreateWithoutUserInput!
+    update: NexusGenInputs['register_logUpdateWithoutUserDataInput']; // register_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['register_logWhereUniqueInput']; // register_logWhereUniqueInput!
+  }
+  register_logWhereInput: { // input type
+    AND?: NexusGenInputs['register_logWhereInput'][] | null; // [register_logWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['register_logWhereInput'][] | null; // [register_logWhereInput!]
+    OR?: NexusGenInputs['register_logWhereInput'][] | null; // [register_logWhereInput!]
+    register_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    register_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
   register_logWhereUniqueInput: { // input type
     id?: number | null; // Int
     user_pk?: number | null; // Int
+  }
+  todoCreateInput: { // input type
+    created_time?: any | null; // DateTime
+    is_completed?: number | null; // Int
+    todo?: string | null; // String
+    todo_category: NexusGenInputs['todo_categoryCreateOneWithoutTodoInput']; // todo_categoryCreateOneWithoutTodoInput!
+    updated_time?: any | null; // DateTime
+    user: NexusGenInputs['userCreateOneWithoutTodoInput']; // userCreateOneWithoutTodoInput!
   }
   todoCreateManyWithoutTodo_categoryInput: { // input type
     connect?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
@@ -64,19 +292,146 @@ export interface NexusGenInputs {
     create?: NexusGenInputs['todoCreateWithoutUserInput'][] | null; // [todoCreateWithoutUserInput!]
   }
   todoCreateWithoutTodo_categoryInput: { // input type
-    is_completed: number; // Int!
+    created_time?: any | null; // DateTime
+    is_completed?: number | null; // Int
     todo?: string | null; // String
+    updated_time?: any | null; // DateTime
     user: NexusGenInputs['userCreateOneWithoutTodoInput']; // userCreateOneWithoutTodoInput!
   }
   todoCreateWithoutUserInput: { // input type
-    is_completed: number; // Int!
+    created_time?: any | null; // DateTime
+    is_completed?: number | null; // Int
     todo?: string | null; // String
     todo_category: NexusGenInputs['todo_categoryCreateOneWithoutTodoInput']; // todo_categoryCreateOneWithoutTodoInput!
+    updated_time?: any | null; // DateTime
+  }
+  todoFilter: { // input type
+    every?: NexusGenInputs['todoWhereInput'] | null; // todoWhereInput
+    none?: NexusGenInputs['todoWhereInput'] | null; // todoWhereInput
+    some?: NexusGenInputs['todoWhereInput'] | null; // todoWhereInput
+  }
+  todoOrderByInput: { // input type
+    created_time?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    id?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    is_completed?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    todo?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    todo_category_pk?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    updated_time?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+    user_pk?: NexusGenEnums['OrderByArg'] | null; // OrderByArg
+  }
+  todoScalarWhereInput: { // input type
+    AND?: NexusGenInputs['todoScalarWhereInput'][] | null; // [todoScalarWhereInput!]
+    created_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    is_completed?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['todoScalarWhereInput'][] | null; // [todoScalarWhereInput!]
+    OR?: NexusGenInputs['todoScalarWhereInput'][] | null; // [todoScalarWhereInput!]
+    todo?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    todo_category_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    updated_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  todoUpdateInput: { // input type
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    is_completed?: number | null; // Int
+    todo?: string | null; // String
+    todo_category?: NexusGenInputs['todo_categoryUpdateOneRequiredWithoutTodoInput'] | null; // todo_categoryUpdateOneRequiredWithoutTodoInput
+    updated_time?: any | null; // DateTime
+    user?: NexusGenInputs['userUpdateOneRequiredWithoutTodoInput'] | null; // userUpdateOneRequiredWithoutTodoInput
+  }
+  todoUpdateManyDataInput: { // input type
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    is_completed?: number | null; // Int
+    todo?: string | null; // String
+    updated_time?: any | null; // DateTime
+  }
+  todoUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['todoUpdateManyDataInput']; // todoUpdateManyDataInput!
+    where: NexusGenInputs['todoScalarWhereInput']; // todoScalarWhereInput!
+  }
+  todoUpdateManyWithoutTodo_categoryInput: { // input type
+    connect?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    create?: NexusGenInputs['todoCreateWithoutTodo_categoryInput'][] | null; // [todoCreateWithoutTodo_categoryInput!]
+    delete?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['todoScalarWhereInput'][] | null; // [todoScalarWhereInput!]
+    disconnect?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    set?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    update?: NexusGenInputs['todoUpdateWithWhereUniqueWithoutTodo_categoryInput'][] | null; // [todoUpdateWithWhereUniqueWithoutTodo_categoryInput!]
+    updateMany?: NexusGenInputs['todoUpdateManyWithWhereNestedInput'][] | null; // [todoUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['todoUpsertWithWhereUniqueWithoutTodo_categoryInput'][] | null; // [todoUpsertWithWhereUniqueWithoutTodo_categoryInput!]
+  }
+  todoUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    create?: NexusGenInputs['todoCreateWithoutUserInput'][] | null; // [todoCreateWithoutUserInput!]
+    delete?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['todoScalarWhereInput'][] | null; // [todoScalarWhereInput!]
+    disconnect?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    set?: NexusGenInputs['todoWhereUniqueInput'][] | null; // [todoWhereUniqueInput!]
+    update?: NexusGenInputs['todoUpdateWithWhereUniqueWithoutUserInput'][] | null; // [todoUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['todoUpdateManyWithWhereNestedInput'][] | null; // [todoUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['todoUpsertWithWhereUniqueWithoutUserInput'][] | null; // [todoUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  todoUpdateWithWhereUniqueWithoutTodo_categoryInput: { // input type
+    data: NexusGenInputs['todoUpdateWithoutTodo_categoryDataInput']; // todoUpdateWithoutTodo_categoryDataInput!
+    where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+  }
+  todoUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['todoUpdateWithoutUserDataInput']; // todoUpdateWithoutUserDataInput!
+    where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+  }
+  todoUpdateWithoutTodo_categoryDataInput: { // input type
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    is_completed?: number | null; // Int
+    todo?: string | null; // String
+    updated_time?: any | null; // DateTime
+    user?: NexusGenInputs['userUpdateOneRequiredWithoutTodoInput'] | null; // userUpdateOneRequiredWithoutTodoInput
+  }
+  todoUpdateWithoutUserDataInput: { // input type
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    is_completed?: number | null; // Int
+    todo?: string | null; // String
+    todo_category?: NexusGenInputs['todo_categoryUpdateOneRequiredWithoutTodoInput'] | null; // todo_categoryUpdateOneRequiredWithoutTodoInput
+    updated_time?: any | null; // DateTime
+  }
+  todoUpsertWithWhereUniqueWithoutTodo_categoryInput: { // input type
+    create: NexusGenInputs['todoCreateWithoutTodo_categoryInput']; // todoCreateWithoutTodo_categoryInput!
+    update: NexusGenInputs['todoUpdateWithoutTodo_categoryDataInput']; // todoUpdateWithoutTodo_categoryDataInput!
+    where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+  }
+  todoUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['todoCreateWithoutUserInput']; // todoCreateWithoutUserInput!
+    update: NexusGenInputs['todoUpdateWithoutUserDataInput']; // todoUpdateWithoutUserDataInput!
+    where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+  }
+  todoWhereInput: { // input type
+    AND?: NexusGenInputs['todoWhereInput'][] | null; // [todoWhereInput!]
+    created_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    is_completed?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['todoWhereInput'][] | null; // [todoWhereInput!]
+    OR?: NexusGenInputs['todoWhereInput'][] | null; // [todoWhereInput!]
+    todo?: NexusGenInputs['NullableStringFilter'] | null; // NullableStringFilter
+    todo_category?: NexusGenInputs['todo_categoryWhereInput'] | null; // todo_categoryWhereInput
+    todo_category_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    updated_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
   }
   todoWhereUniqueInput: { // input type
     id?: number | null; // Int
     todo_category_pk?: number | null; // Int
     user_pk?: number | null; // Int
+  }
+  todo_categoryCreateInput: { // input type
+    category: string; // String!
+    created_time?: any | null; // DateTime
+    todo?: NexusGenInputs['todoCreateManyWithoutTodo_categoryInput'] | null; // todoCreateManyWithoutTodo_categoryInput
+    updated_time?: any | null; // DateTime
+    user: NexusGenInputs['userCreateOneWithoutTodo_categoryInput']; // userCreateOneWithoutTodo_categoryInput!
   }
   todo_categoryCreateManyWithoutUserInput: { // input type
     connect?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
@@ -88,11 +443,105 @@ export interface NexusGenInputs {
   }
   todo_categoryCreateWithoutTodoInput: { // input type
     category: string; // String!
+    created_time?: any | null; // DateTime
+    updated_time?: any | null; // DateTime
     user: NexusGenInputs['userCreateOneWithoutTodo_categoryInput']; // userCreateOneWithoutTodo_categoryInput!
   }
   todo_categoryCreateWithoutUserInput: { // input type
     category: string; // String!
+    created_time?: any | null; // DateTime
     todo?: NexusGenInputs['todoCreateManyWithoutTodo_categoryInput'] | null; // todoCreateManyWithoutTodo_categoryInput
+    updated_time?: any | null; // DateTime
+  }
+  todo_categoryFilter: { // input type
+    every?: NexusGenInputs['todo_categoryWhereInput'] | null; // todo_categoryWhereInput
+    none?: NexusGenInputs['todo_categoryWhereInput'] | null; // todo_categoryWhereInput
+    some?: NexusGenInputs['todo_categoryWhereInput'] | null; // todo_categoryWhereInput
+  }
+  todo_categoryScalarWhereInput: { // input type
+    AND?: NexusGenInputs['todo_categoryScalarWhereInput'][] | null; // [todo_categoryScalarWhereInput!]
+    category?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    created_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['todo_categoryScalarWhereInput'][] | null; // [todo_categoryScalarWhereInput!]
+    OR?: NexusGenInputs['todo_categoryScalarWhereInput'][] | null; // [todo_categoryScalarWhereInput!]
+    todo?: NexusGenInputs['todoFilter'] | null; // todoFilter
+    updated_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  todo_categoryUpdateInput: { // input type
+    category?: string | null; // String
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    todo?: NexusGenInputs['todoUpdateManyWithoutTodo_categoryInput'] | null; // todoUpdateManyWithoutTodo_categoryInput
+    updated_time?: any | null; // DateTime
+    user?: NexusGenInputs['userUpdateOneRequiredWithoutTodo_categoryInput'] | null; // userUpdateOneRequiredWithoutTodo_categoryInput
+  }
+  todo_categoryUpdateManyDataInput: { // input type
+    category?: string | null; // String
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    updated_time?: any | null; // DateTime
+  }
+  todo_categoryUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['todo_categoryUpdateManyDataInput']; // todo_categoryUpdateManyDataInput!
+    where: NexusGenInputs['todo_categoryScalarWhereInput']; // todo_categoryScalarWhereInput!
+  }
+  todo_categoryUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
+    create?: NexusGenInputs['todo_categoryCreateWithoutUserInput'][] | null; // [todo_categoryCreateWithoutUserInput!]
+    delete?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['todo_categoryScalarWhereInput'][] | null; // [todo_categoryScalarWhereInput!]
+    disconnect?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
+    set?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
+    update?: NexusGenInputs['todo_categoryUpdateWithWhereUniqueWithoutUserInput'][] | null; // [todo_categoryUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['todo_categoryUpdateManyWithWhereNestedInput'][] | null; // [todo_categoryUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['todo_categoryUpsertWithWhereUniqueWithoutUserInput'][] | null; // [todo_categoryUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  todo_categoryUpdateOneRequiredWithoutTodoInput: { // input type
+    connect?: NexusGenInputs['todo_categoryWhereUniqueInput'] | null; // todo_categoryWhereUniqueInput
+    create?: NexusGenInputs['todo_categoryCreateWithoutTodoInput'] | null; // todo_categoryCreateWithoutTodoInput
+    update?: NexusGenInputs['todo_categoryUpdateWithoutTodoDataInput'] | null; // todo_categoryUpdateWithoutTodoDataInput
+    upsert?: NexusGenInputs['todo_categoryUpsertWithoutTodoInput'] | null; // todo_categoryUpsertWithoutTodoInput
+  }
+  todo_categoryUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['todo_categoryUpdateWithoutUserDataInput']; // todo_categoryUpdateWithoutUserDataInput!
+    where: NexusGenInputs['todo_categoryWhereUniqueInput']; // todo_categoryWhereUniqueInput!
+  }
+  todo_categoryUpdateWithoutTodoDataInput: { // input type
+    category?: string | null; // String
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    updated_time?: any | null; // DateTime
+    user?: NexusGenInputs['userUpdateOneRequiredWithoutTodo_categoryInput'] | null; // userUpdateOneRequiredWithoutTodo_categoryInput
+  }
+  todo_categoryUpdateWithoutUserDataInput: { // input type
+    category?: string | null; // String
+    created_time?: any | null; // DateTime
+    id?: number | null; // Int
+    todo?: NexusGenInputs['todoUpdateManyWithoutTodo_categoryInput'] | null; // todoUpdateManyWithoutTodo_categoryInput
+    updated_time?: any | null; // DateTime
+  }
+  todo_categoryUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['todo_categoryCreateWithoutUserInput']; // todo_categoryCreateWithoutUserInput!
+    update: NexusGenInputs['todo_categoryUpdateWithoutUserDataInput']; // todo_categoryUpdateWithoutUserDataInput!
+    where: NexusGenInputs['todo_categoryWhereUniqueInput']; // todo_categoryWhereUniqueInput!
+  }
+  todo_categoryUpsertWithoutTodoInput: { // input type
+    create: NexusGenInputs['todo_categoryCreateWithoutTodoInput']; // todo_categoryCreateWithoutTodoInput!
+    update: NexusGenInputs['todo_categoryUpdateWithoutTodoDataInput']; // todo_categoryUpdateWithoutTodoDataInput!
+  }
+  todo_categoryWhereInput: { // input type
+    AND?: NexusGenInputs['todo_categoryWhereInput'][] | null; // [todo_categoryWhereInput!]
+    category?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    created_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['todo_categoryWhereInput'][] | null; // [todo_categoryWhereInput!]
+    OR?: NexusGenInputs['todo_categoryWhereInput'][] | null; // [todo_categoryWhereInput!]
+    todo?: NexusGenInputs['todoFilter'] | null; // todoFilter
+    updated_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
   }
   todo_categoryWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -149,6 +598,75 @@ export interface NexusGenInputs {
     user_id: string; // String!
     withdraw_log?: NexusGenInputs['withdraw_logCreateManyWithoutUserInput'] | null; // withdraw_logCreateManyWithoutUserInput
   }
+  userUpdateOneRequiredWithoutTodoInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    create?: NexusGenInputs['userCreateWithoutTodoInput'] | null; // userCreateWithoutTodoInput
+    update?: NexusGenInputs['userUpdateWithoutTodoDataInput'] | null; // userUpdateWithoutTodoDataInput
+    upsert?: NexusGenInputs['userUpsertWithoutTodoInput'] | null; // userUpsertWithoutTodoInput
+  }
+  userUpdateOneRequiredWithoutTodo_categoryInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    create?: NexusGenInputs['userCreateWithoutTodo_categoryInput'] | null; // userCreateWithoutTodo_categoryInput
+    update?: NexusGenInputs['userUpdateWithoutTodo_categoryDataInput'] | null; // userUpdateWithoutTodo_categoryDataInput
+    upsert?: NexusGenInputs['userUpsertWithoutTodo_categoryInput'] | null; // userUpsertWithoutTodo_categoryInput
+  }
+  userUpdateWithoutTodoDataInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
+    is_block?: number | null; // Int
+    is_verify?: number | null; // Int
+    is_withdraw?: number | null; // Int
+    login_log?: NexusGenInputs['login_logUpdateManyWithoutUserInput'] | null; // login_logUpdateManyWithoutUserInput
+    oauth?: NexusGenInputs['oauthUpdateManyWithoutUserInput'] | null; // oauthUpdateManyWithoutUserInput
+    password?: string | null; // String
+    password_salt?: string | null; // String
+    register_log?: NexusGenInputs['register_logUpdateManyWithoutUserInput'] | null; // register_logUpdateManyWithoutUserInput
+    todo_category?: NexusGenInputs['todo_categoryUpdateManyWithoutUserInput'] | null; // todo_categoryUpdateManyWithoutUserInput
+    user_id?: string | null; // String
+    withdraw_log?: NexusGenInputs['withdraw_logUpdateManyWithoutUserInput'] | null; // withdraw_logUpdateManyWithoutUserInput
+  }
+  userUpdateWithoutTodo_categoryDataInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
+    is_block?: number | null; // Int
+    is_verify?: number | null; // Int
+    is_withdraw?: number | null; // Int
+    login_log?: NexusGenInputs['login_logUpdateManyWithoutUserInput'] | null; // login_logUpdateManyWithoutUserInput
+    oauth?: NexusGenInputs['oauthUpdateManyWithoutUserInput'] | null; // oauthUpdateManyWithoutUserInput
+    password?: string | null; // String
+    password_salt?: string | null; // String
+    register_log?: NexusGenInputs['register_logUpdateManyWithoutUserInput'] | null; // register_logUpdateManyWithoutUserInput
+    todo?: NexusGenInputs['todoUpdateManyWithoutUserInput'] | null; // todoUpdateManyWithoutUserInput
+    user_id?: string | null; // String
+    withdraw_log?: NexusGenInputs['withdraw_logUpdateManyWithoutUserInput'] | null; // withdraw_logUpdateManyWithoutUserInput
+  }
+  userUpsertWithoutTodoInput: { // input type
+    create: NexusGenInputs['userCreateWithoutTodoInput']; // userCreateWithoutTodoInput!
+    update: NexusGenInputs['userUpdateWithoutTodoDataInput']; // userUpdateWithoutTodoDataInput!
+  }
+  userUpsertWithoutTodo_categoryInput: { // input type
+    create: NexusGenInputs['userCreateWithoutTodo_categoryInput']; // userCreateWithoutTodo_categoryInput!
+    update: NexusGenInputs['userUpdateWithoutTodo_categoryDataInput']; // userUpdateWithoutTodo_categoryDataInput!
+  }
+  userWhereInput: { // input type
+    AND?: NexusGenInputs['userWhereInput'][] | null; // [userWhereInput!]
+    email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    is_block?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    is_verify?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    is_withdraw?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    login_log?: NexusGenInputs['login_logFilter'] | null; // login_logFilter
+    NOT?: NexusGenInputs['userWhereInput'][] | null; // [userWhereInput!]
+    oauth?: NexusGenInputs['oauthFilter'] | null; // oauthFilter
+    OR?: NexusGenInputs['userWhereInput'][] | null; // [userWhereInput!]
+    password?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    password_salt?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    register_log?: NexusGenInputs['register_logFilter'] | null; // register_logFilter
+    todo?: NexusGenInputs['todoFilter'] | null; // todoFilter
+    todo_category?: NexusGenInputs['todo_categoryFilter'] | null; // todo_categoryFilter
+    user_id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    withdraw_log?: NexusGenInputs['withdraw_logFilter'] | null; // withdraw_logFilter
+  }
   userWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: number | null; // Int
@@ -160,7 +678,65 @@ export interface NexusGenInputs {
   }
   withdraw_logCreateWithoutUserInput: { // input type
     withdraw_ip: string; // String!
-    withdraw_time: any; // DateTime!
+    withdraw_time?: any | null; // DateTime
+  }
+  withdraw_logFilter: { // input type
+    every?: NexusGenInputs['withdraw_logWhereInput'] | null; // withdraw_logWhereInput
+    none?: NexusGenInputs['withdraw_logWhereInput'] | null; // withdraw_logWhereInput
+    some?: NexusGenInputs['withdraw_logWhereInput'] | null; // withdraw_logWhereInput
+  }
+  withdraw_logScalarWhereInput: { // input type
+    AND?: NexusGenInputs['withdraw_logScalarWhereInput'][] | null; // [withdraw_logScalarWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['withdraw_logScalarWhereInput'][] | null; // [withdraw_logScalarWhereInput!]
+    OR?: NexusGenInputs['withdraw_logScalarWhereInput'][] | null; // [withdraw_logScalarWhereInput!]
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    withdraw_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    withdraw_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  withdraw_logUpdateManyDataInput: { // input type
+    id?: number | null; // Int
+    withdraw_ip?: string | null; // String
+    withdraw_time?: any | null; // DateTime
+  }
+  withdraw_logUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['withdraw_logUpdateManyDataInput']; // withdraw_logUpdateManyDataInput!
+    where: NexusGenInputs['withdraw_logScalarWhereInput']; // withdraw_logScalarWhereInput!
+  }
+  withdraw_logUpdateManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['withdraw_logWhereUniqueInput'][] | null; // [withdraw_logWhereUniqueInput!]
+    create?: NexusGenInputs['withdraw_logCreateWithoutUserInput'][] | null; // [withdraw_logCreateWithoutUserInput!]
+    delete?: NexusGenInputs['withdraw_logWhereUniqueInput'][] | null; // [withdraw_logWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['withdraw_logScalarWhereInput'][] | null; // [withdraw_logScalarWhereInput!]
+    disconnect?: NexusGenInputs['withdraw_logWhereUniqueInput'][] | null; // [withdraw_logWhereUniqueInput!]
+    set?: NexusGenInputs['withdraw_logWhereUniqueInput'][] | null; // [withdraw_logWhereUniqueInput!]
+    update?: NexusGenInputs['withdraw_logUpdateWithWhereUniqueWithoutUserInput'][] | null; // [withdraw_logUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany?: NexusGenInputs['withdraw_logUpdateManyWithWhereNestedInput'][] | null; // [withdraw_logUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['withdraw_logUpsertWithWhereUniqueWithoutUserInput'][] | null; // [withdraw_logUpsertWithWhereUniqueWithoutUserInput!]
+  }
+  withdraw_logUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['withdraw_logUpdateWithoutUserDataInput']; // withdraw_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['withdraw_logWhereUniqueInput']; // withdraw_logWhereUniqueInput!
+  }
+  withdraw_logUpdateWithoutUserDataInput: { // input type
+    id?: number | null; // Int
+    withdraw_ip?: string | null; // String
+    withdraw_time?: any | null; // DateTime
+  }
+  withdraw_logUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['withdraw_logCreateWithoutUserInput']; // withdraw_logCreateWithoutUserInput!
+    update: NexusGenInputs['withdraw_logUpdateWithoutUserDataInput']; // withdraw_logUpdateWithoutUserDataInput!
+    where: NexusGenInputs['withdraw_logWhereUniqueInput']; // withdraw_logWhereUniqueInput!
+  }
+  withdraw_logWhereInput: { // input type
+    AND?: NexusGenInputs['withdraw_logWhereInput'][] | null; // [withdraw_logWhereInput!]
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    NOT?: NexusGenInputs['withdraw_logWhereInput'][] | null; // [withdraw_logWhereInput!]
+    OR?: NexusGenInputs['withdraw_logWhereInput'][] | null; // [withdraw_logWhereInput!]
+    user?: NexusGenInputs['userWhereInput'] | null; // userWhereInput
+    user_pk?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    withdraw_ip?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    withdraw_time?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   withdraw_logWhereUniqueInput: { // input type
     id?: number | null; // Int
@@ -169,16 +745,27 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  OrderByArg: "asc" | "desc"
 }
 
 export interface NexusGenRootTypes {
   Mutation: {};
   Query: {};
+  todo: { // root type
+    id: number; // Int!
+    is_completed: number; // Int!
+    todo?: string | null; // String
+  }
+  todo_category: { // root type
+    category: string; // String!
+    id: number; // Int!
+  }
   user: { // root type
     email: string; // String!
     id: number; // Int!
-    is_block?: number | null; // Int
-    is_withdraw?: number | null; // Int
+    is_block: number; // Int!
+    is_verify: number; // Int!
+    is_withdraw: number; // Int!
     password: string; // String!
     password_salt: string; // String!
     user_id: string; // String!
@@ -192,50 +779,149 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  DateTimeFilter: NexusGenInputs['DateTimeFilter'];
+  IntFilter: NexusGenInputs['IntFilter'];
+  NullableStringFilter: NexusGenInputs['NullableStringFilter'];
+  StringFilter: NexusGenInputs['StringFilter'];
   login_logCreateManyWithoutUserInput: NexusGenInputs['login_logCreateManyWithoutUserInput'];
   login_logCreateWithoutUserInput: NexusGenInputs['login_logCreateWithoutUserInput'];
+  login_logFilter: NexusGenInputs['login_logFilter'];
+  login_logScalarWhereInput: NexusGenInputs['login_logScalarWhereInput'];
+  login_logUpdateManyDataInput: NexusGenInputs['login_logUpdateManyDataInput'];
+  login_logUpdateManyWithWhereNestedInput: NexusGenInputs['login_logUpdateManyWithWhereNestedInput'];
+  login_logUpdateManyWithoutUserInput: NexusGenInputs['login_logUpdateManyWithoutUserInput'];
+  login_logUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['login_logUpdateWithWhereUniqueWithoutUserInput'];
+  login_logUpdateWithoutUserDataInput: NexusGenInputs['login_logUpdateWithoutUserDataInput'];
+  login_logUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['login_logUpsertWithWhereUniqueWithoutUserInput'];
+  login_logWhereInput: NexusGenInputs['login_logWhereInput'];
   login_logWhereUniqueInput: NexusGenInputs['login_logWhereUniqueInput'];
   oauthCreateManyWithoutUserInput: NexusGenInputs['oauthCreateManyWithoutUserInput'];
   oauthCreateWithoutUserInput: NexusGenInputs['oauthCreateWithoutUserInput'];
+  oauthFilter: NexusGenInputs['oauthFilter'];
+  oauthScalarWhereInput: NexusGenInputs['oauthScalarWhereInput'];
+  oauthUpdateManyDataInput: NexusGenInputs['oauthUpdateManyDataInput'];
+  oauthUpdateManyWithWhereNestedInput: NexusGenInputs['oauthUpdateManyWithWhereNestedInput'];
+  oauthUpdateManyWithoutUserInput: NexusGenInputs['oauthUpdateManyWithoutUserInput'];
+  oauthUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['oauthUpdateWithWhereUniqueWithoutUserInput'];
+  oauthUpdateWithoutUserDataInput: NexusGenInputs['oauthUpdateWithoutUserDataInput'];
+  oauthUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['oauthUpsertWithWhereUniqueWithoutUserInput'];
+  oauthWhereInput: NexusGenInputs['oauthWhereInput'];
   oauthWhereUniqueInput: NexusGenInputs['oauthWhereUniqueInput'];
   register_logCreateManyWithoutUserInput: NexusGenInputs['register_logCreateManyWithoutUserInput'];
   register_logCreateWithoutUserInput: NexusGenInputs['register_logCreateWithoutUserInput'];
+  register_logFilter: NexusGenInputs['register_logFilter'];
+  register_logScalarWhereInput: NexusGenInputs['register_logScalarWhereInput'];
+  register_logUpdateManyDataInput: NexusGenInputs['register_logUpdateManyDataInput'];
+  register_logUpdateManyWithWhereNestedInput: NexusGenInputs['register_logUpdateManyWithWhereNestedInput'];
+  register_logUpdateManyWithoutUserInput: NexusGenInputs['register_logUpdateManyWithoutUserInput'];
+  register_logUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['register_logUpdateWithWhereUniqueWithoutUserInput'];
+  register_logUpdateWithoutUserDataInput: NexusGenInputs['register_logUpdateWithoutUserDataInput'];
+  register_logUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['register_logUpsertWithWhereUniqueWithoutUserInput'];
+  register_logWhereInput: NexusGenInputs['register_logWhereInput'];
   register_logWhereUniqueInput: NexusGenInputs['register_logWhereUniqueInput'];
+  todoCreateInput: NexusGenInputs['todoCreateInput'];
   todoCreateManyWithoutTodo_categoryInput: NexusGenInputs['todoCreateManyWithoutTodo_categoryInput'];
   todoCreateManyWithoutUserInput: NexusGenInputs['todoCreateManyWithoutUserInput'];
   todoCreateWithoutTodo_categoryInput: NexusGenInputs['todoCreateWithoutTodo_categoryInput'];
   todoCreateWithoutUserInput: NexusGenInputs['todoCreateWithoutUserInput'];
+  todoFilter: NexusGenInputs['todoFilter'];
+  todoOrderByInput: NexusGenInputs['todoOrderByInput'];
+  todoScalarWhereInput: NexusGenInputs['todoScalarWhereInput'];
+  todoUpdateInput: NexusGenInputs['todoUpdateInput'];
+  todoUpdateManyDataInput: NexusGenInputs['todoUpdateManyDataInput'];
+  todoUpdateManyWithWhereNestedInput: NexusGenInputs['todoUpdateManyWithWhereNestedInput'];
+  todoUpdateManyWithoutTodo_categoryInput: NexusGenInputs['todoUpdateManyWithoutTodo_categoryInput'];
+  todoUpdateManyWithoutUserInput: NexusGenInputs['todoUpdateManyWithoutUserInput'];
+  todoUpdateWithWhereUniqueWithoutTodo_categoryInput: NexusGenInputs['todoUpdateWithWhereUniqueWithoutTodo_categoryInput'];
+  todoUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['todoUpdateWithWhereUniqueWithoutUserInput'];
+  todoUpdateWithoutTodo_categoryDataInput: NexusGenInputs['todoUpdateWithoutTodo_categoryDataInput'];
+  todoUpdateWithoutUserDataInput: NexusGenInputs['todoUpdateWithoutUserDataInput'];
+  todoUpsertWithWhereUniqueWithoutTodo_categoryInput: NexusGenInputs['todoUpsertWithWhereUniqueWithoutTodo_categoryInput'];
+  todoUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['todoUpsertWithWhereUniqueWithoutUserInput'];
+  todoWhereInput: NexusGenInputs['todoWhereInput'];
   todoWhereUniqueInput: NexusGenInputs['todoWhereUniqueInput'];
+  todo_categoryCreateInput: NexusGenInputs['todo_categoryCreateInput'];
   todo_categoryCreateManyWithoutUserInput: NexusGenInputs['todo_categoryCreateManyWithoutUserInput'];
   todo_categoryCreateOneWithoutTodoInput: NexusGenInputs['todo_categoryCreateOneWithoutTodoInput'];
   todo_categoryCreateWithoutTodoInput: NexusGenInputs['todo_categoryCreateWithoutTodoInput'];
   todo_categoryCreateWithoutUserInput: NexusGenInputs['todo_categoryCreateWithoutUserInput'];
+  todo_categoryFilter: NexusGenInputs['todo_categoryFilter'];
+  todo_categoryScalarWhereInput: NexusGenInputs['todo_categoryScalarWhereInput'];
+  todo_categoryUpdateInput: NexusGenInputs['todo_categoryUpdateInput'];
+  todo_categoryUpdateManyDataInput: NexusGenInputs['todo_categoryUpdateManyDataInput'];
+  todo_categoryUpdateManyWithWhereNestedInput: NexusGenInputs['todo_categoryUpdateManyWithWhereNestedInput'];
+  todo_categoryUpdateManyWithoutUserInput: NexusGenInputs['todo_categoryUpdateManyWithoutUserInput'];
+  todo_categoryUpdateOneRequiredWithoutTodoInput: NexusGenInputs['todo_categoryUpdateOneRequiredWithoutTodoInput'];
+  todo_categoryUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['todo_categoryUpdateWithWhereUniqueWithoutUserInput'];
+  todo_categoryUpdateWithoutTodoDataInput: NexusGenInputs['todo_categoryUpdateWithoutTodoDataInput'];
+  todo_categoryUpdateWithoutUserDataInput: NexusGenInputs['todo_categoryUpdateWithoutUserDataInput'];
+  todo_categoryUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['todo_categoryUpsertWithWhereUniqueWithoutUserInput'];
+  todo_categoryUpsertWithoutTodoInput: NexusGenInputs['todo_categoryUpsertWithoutTodoInput'];
+  todo_categoryWhereInput: NexusGenInputs['todo_categoryWhereInput'];
   todo_categoryWhereUniqueInput: NexusGenInputs['todo_categoryWhereUniqueInput'];
   userCreateInput: NexusGenInputs['userCreateInput'];
   userCreateOneWithoutTodoInput: NexusGenInputs['userCreateOneWithoutTodoInput'];
   userCreateOneWithoutTodo_categoryInput: NexusGenInputs['userCreateOneWithoutTodo_categoryInput'];
   userCreateWithoutTodoInput: NexusGenInputs['userCreateWithoutTodoInput'];
   userCreateWithoutTodo_categoryInput: NexusGenInputs['userCreateWithoutTodo_categoryInput'];
+  userUpdateOneRequiredWithoutTodoInput: NexusGenInputs['userUpdateOneRequiredWithoutTodoInput'];
+  userUpdateOneRequiredWithoutTodo_categoryInput: NexusGenInputs['userUpdateOneRequiredWithoutTodo_categoryInput'];
+  userUpdateWithoutTodoDataInput: NexusGenInputs['userUpdateWithoutTodoDataInput'];
+  userUpdateWithoutTodo_categoryDataInput: NexusGenInputs['userUpdateWithoutTodo_categoryDataInput'];
+  userUpsertWithoutTodoInput: NexusGenInputs['userUpsertWithoutTodoInput'];
+  userUpsertWithoutTodo_categoryInput: NexusGenInputs['userUpsertWithoutTodo_categoryInput'];
+  userWhereInput: NexusGenInputs['userWhereInput'];
   userWhereUniqueInput: NexusGenInputs['userWhereUniqueInput'];
   withdraw_logCreateManyWithoutUserInput: NexusGenInputs['withdraw_logCreateManyWithoutUserInput'];
   withdraw_logCreateWithoutUserInput: NexusGenInputs['withdraw_logCreateWithoutUserInput'];
+  withdraw_logFilter: NexusGenInputs['withdraw_logFilter'];
+  withdraw_logScalarWhereInput: NexusGenInputs['withdraw_logScalarWhereInput'];
+  withdraw_logUpdateManyDataInput: NexusGenInputs['withdraw_logUpdateManyDataInput'];
+  withdraw_logUpdateManyWithWhereNestedInput: NexusGenInputs['withdraw_logUpdateManyWithWhereNestedInput'];
+  withdraw_logUpdateManyWithoutUserInput: NexusGenInputs['withdraw_logUpdateManyWithoutUserInput'];
+  withdraw_logUpdateWithWhereUniqueWithoutUserInput: NexusGenInputs['withdraw_logUpdateWithWhereUniqueWithoutUserInput'];
+  withdraw_logUpdateWithoutUserDataInput: NexusGenInputs['withdraw_logUpdateWithoutUserDataInput'];
+  withdraw_logUpsertWithWhereUniqueWithoutUserInput: NexusGenInputs['withdraw_logUpsertWithWhereUniqueWithoutUserInput'];
+  withdraw_logWhereInput: NexusGenInputs['withdraw_logWhereInput'];
   withdraw_logWhereUniqueInput: NexusGenInputs['withdraw_logWhereUniqueInput'];
+  OrderByArg: NexusGenEnums['OrderByArg'];
 }
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    createOnetodo: NexusGenRootTypes['todo']; // todo!
+    createOnetodo_category: NexusGenRootTypes['todo_category']; // todo_category!
     createOneuser: NexusGenRootTypes['user']; // user!
-    signup: NexusGenRootTypes['user']; // user!
+    tt: NexusGenRootTypes['user']; // user!
+    updateOnetodo: NexusGenRootTypes['todo'] | null; // todo
+    updateOnetodo_category: NexusGenRootTypes['todo_category'] | null; // todo_category
   }
   Query: { // field return type
     info: string; // String!
+    test: string; // String!
+    todo: NexusGenRootTypes['todo'] | null; // todo
+    todoCategories: NexusGenRootTypes['todo_category'][]; // [todo_category!]!
+    todoCategory: NexusGenRootTypes['todo_category'] | null; // todo_category
+    todos: NexusGenRootTypes['todo'][]; // [todo!]!
+    user: NexusGenRootTypes['user'] | null; // user
     users: NexusGenRootTypes['user'][]; // [user!]!
+  }
+  todo: { // field return type
+    id: number; // Int!
+    is_completed: number; // Int!
+    todo: string | null; // String
+    todo_category: NexusGenRootTypes['todo_category']; // todo_category!
+  }
+  todo_category: { // field return type
+    category: string; // String!
+    id: number; // Int!
   }
   user: { // field return type
     email: string; // String!
     id: number; // Int!
-    is_block: number | null; // Int
-    is_withdraw: number | null; // Int
+    is_block: number; // Int!
+    is_verify: number; // Int!
+    is_withdraw: number; // Int!
     password: string; // String!
     password_salt: string; // String!
     user_id: string; // String!
@@ -244,14 +930,53 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createOnetodo: { // args
+      data: NexusGenInputs['todoCreateInput']; // todoCreateInput!
+    }
+    createOnetodo_category: { // args
+      data: NexusGenInputs['todo_categoryCreateInput']; // todo_categoryCreateInput!
+    }
     createOneuser: { // args
       data: NexusGenInputs['userCreateInput']; // userCreateInput!
     }
-    signup: { // args
-      email: string; // String!
+    tt: { // args
+      user_id?: string | null; // String
+    }
+    updateOnetodo: { // args
+      data: NexusGenInputs['todoUpdateInput']; // todoUpdateInput!
+      where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+    }
+    updateOnetodo_category: { // args
+      data: NexusGenInputs['todo_categoryUpdateInput']; // todo_categoryUpdateInput!
+      where: NexusGenInputs['todo_categoryWhereUniqueInput']; // todo_categoryWhereUniqueInput!
     }
   }
   Query: {
+    todo: { // args
+      where: NexusGenInputs['todoWhereUniqueInput']; // todoWhereUniqueInput!
+    }
+    todoCategories: { // args
+      after?: NexusGenInputs['todo_categoryWhereUniqueInput'] | null; // todo_categoryWhereUniqueInput
+      before?: NexusGenInputs['todo_categoryWhereUniqueInput'] | null; // todo_categoryWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      skip?: number | null; // Int
+    }
+    todoCategory: { // args
+      where: NexusGenInputs['todo_categoryWhereUniqueInput']; // todo_categoryWhereUniqueInput!
+    }
+    todos: { // args
+      after?: NexusGenInputs['todoWhereUniqueInput'] | null; // todoWhereUniqueInput
+      before?: NexusGenInputs['todoWhereUniqueInput'] | null; // todoWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['todoOrderByInput'] | null; // todoOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['todoWhereInput'] | null; // todoWhereInput
+    }
+    user: { // args
+      where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+    }
     users: { // args
       after?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
       before?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
@@ -267,11 +992,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "user";
+export type NexusGenObjectNames = "Mutation" | "Query" | "todo" | "todo_category" | "user";
 
-export type NexusGenInputNames = "login_logCreateManyWithoutUserInput" | "login_logCreateWithoutUserInput" | "login_logWhereUniqueInput" | "oauthCreateManyWithoutUserInput" | "oauthCreateWithoutUserInput" | "oauthWhereUniqueInput" | "register_logCreateManyWithoutUserInput" | "register_logCreateWithoutUserInput" | "register_logWhereUniqueInput" | "todoCreateManyWithoutTodo_categoryInput" | "todoCreateManyWithoutUserInput" | "todoCreateWithoutTodo_categoryInput" | "todoCreateWithoutUserInput" | "todoWhereUniqueInput" | "todo_categoryCreateManyWithoutUserInput" | "todo_categoryCreateOneWithoutTodoInput" | "todo_categoryCreateWithoutTodoInput" | "todo_categoryCreateWithoutUserInput" | "todo_categoryWhereUniqueInput" | "userCreateInput" | "userCreateOneWithoutTodoInput" | "userCreateOneWithoutTodo_categoryInput" | "userCreateWithoutTodoInput" | "userCreateWithoutTodo_categoryInput" | "userWhereUniqueInput" | "withdraw_logCreateManyWithoutUserInput" | "withdraw_logCreateWithoutUserInput" | "withdraw_logWhereUniqueInput";
+export type NexusGenInputNames = "DateTimeFilter" | "IntFilter" | "NullableStringFilter" | "StringFilter" | "login_logCreateManyWithoutUserInput" | "login_logCreateWithoutUserInput" | "login_logFilter" | "login_logScalarWhereInput" | "login_logUpdateManyDataInput" | "login_logUpdateManyWithWhereNestedInput" | "login_logUpdateManyWithoutUserInput" | "login_logUpdateWithWhereUniqueWithoutUserInput" | "login_logUpdateWithoutUserDataInput" | "login_logUpsertWithWhereUniqueWithoutUserInput" | "login_logWhereInput" | "login_logWhereUniqueInput" | "oauthCreateManyWithoutUserInput" | "oauthCreateWithoutUserInput" | "oauthFilter" | "oauthScalarWhereInput" | "oauthUpdateManyDataInput" | "oauthUpdateManyWithWhereNestedInput" | "oauthUpdateManyWithoutUserInput" | "oauthUpdateWithWhereUniqueWithoutUserInput" | "oauthUpdateWithoutUserDataInput" | "oauthUpsertWithWhereUniqueWithoutUserInput" | "oauthWhereInput" | "oauthWhereUniqueInput" | "register_logCreateManyWithoutUserInput" | "register_logCreateWithoutUserInput" | "register_logFilter" | "register_logScalarWhereInput" | "register_logUpdateManyDataInput" | "register_logUpdateManyWithWhereNestedInput" | "register_logUpdateManyWithoutUserInput" | "register_logUpdateWithWhereUniqueWithoutUserInput" | "register_logUpdateWithoutUserDataInput" | "register_logUpsertWithWhereUniqueWithoutUserInput" | "register_logWhereInput" | "register_logWhereUniqueInput" | "todoCreateInput" | "todoCreateManyWithoutTodo_categoryInput" | "todoCreateManyWithoutUserInput" | "todoCreateWithoutTodo_categoryInput" | "todoCreateWithoutUserInput" | "todoFilter" | "todoOrderByInput" | "todoScalarWhereInput" | "todoUpdateInput" | "todoUpdateManyDataInput" | "todoUpdateManyWithWhereNestedInput" | "todoUpdateManyWithoutTodo_categoryInput" | "todoUpdateManyWithoutUserInput" | "todoUpdateWithWhereUniqueWithoutTodo_categoryInput" | "todoUpdateWithWhereUniqueWithoutUserInput" | "todoUpdateWithoutTodo_categoryDataInput" | "todoUpdateWithoutUserDataInput" | "todoUpsertWithWhereUniqueWithoutTodo_categoryInput" | "todoUpsertWithWhereUniqueWithoutUserInput" | "todoWhereInput" | "todoWhereUniqueInput" | "todo_categoryCreateInput" | "todo_categoryCreateManyWithoutUserInput" | "todo_categoryCreateOneWithoutTodoInput" | "todo_categoryCreateWithoutTodoInput" | "todo_categoryCreateWithoutUserInput" | "todo_categoryFilter" | "todo_categoryScalarWhereInput" | "todo_categoryUpdateInput" | "todo_categoryUpdateManyDataInput" | "todo_categoryUpdateManyWithWhereNestedInput" | "todo_categoryUpdateManyWithoutUserInput" | "todo_categoryUpdateOneRequiredWithoutTodoInput" | "todo_categoryUpdateWithWhereUniqueWithoutUserInput" | "todo_categoryUpdateWithoutTodoDataInput" | "todo_categoryUpdateWithoutUserDataInput" | "todo_categoryUpsertWithWhereUniqueWithoutUserInput" | "todo_categoryUpsertWithoutTodoInput" | "todo_categoryWhereInput" | "todo_categoryWhereUniqueInput" | "userCreateInput" | "userCreateOneWithoutTodoInput" | "userCreateOneWithoutTodo_categoryInput" | "userCreateWithoutTodoInput" | "userCreateWithoutTodo_categoryInput" | "userUpdateOneRequiredWithoutTodoInput" | "userUpdateOneRequiredWithoutTodo_categoryInput" | "userUpdateWithoutTodoDataInput" | "userUpdateWithoutTodo_categoryDataInput" | "userUpsertWithoutTodoInput" | "userUpsertWithoutTodo_categoryInput" | "userWhereInput" | "userWhereUniqueInput" | "withdraw_logCreateManyWithoutUserInput" | "withdraw_logCreateWithoutUserInput" | "withdraw_logFilter" | "withdraw_logScalarWhereInput" | "withdraw_logUpdateManyDataInput" | "withdraw_logUpdateManyWithWhereNestedInput" | "withdraw_logUpdateManyWithoutUserInput" | "withdraw_logUpdateWithWhereUniqueWithoutUserInput" | "withdraw_logUpdateWithoutUserDataInput" | "withdraw_logUpsertWithWhereUniqueWithoutUserInput" | "withdraw_logWhereInput" | "withdraw_logWhereUniqueInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "OrderByArg";
 
 export type NexusGenInterfaceNames = never;
 

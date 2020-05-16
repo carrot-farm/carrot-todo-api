@@ -1,5 +1,6 @@
 import { schema } from 'nexus';
-import { resolve } from 'dns';
+import userQuery from './queries/userQuery';
+import todoQuery from './queries/todoQuery';
 
 // ===== 쿼리
 const Query = schema.queryType({
@@ -9,6 +10,10 @@ const Query = schema.queryType({
       resolve: () => 'hello',
       description: '테스트' 
     })
+
+    userQuery(t);
+
+    todoQuery(t);
 
 
     // ===== 유저 정보
@@ -23,7 +28,7 @@ const Query = schema.queryType({
       pagination: true
     });
 
-  },
+  }
 })
 
 export default Query;

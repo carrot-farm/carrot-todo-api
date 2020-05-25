@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-graphql-prisma-typescript",
+  "name": "carrot-todo-api",
   "version": "0.0.1",
   "license": "private",
   "scripts": {
@@ -40,6 +40,6 @@
     "typescript": "^3.8.3"
   },
   "engines": {
-    "node": ">=13.3.0"
+    "node": ">=12.16.1"
   }
 }

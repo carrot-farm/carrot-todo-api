@@ -32,7 +32,7 @@ const servrOptions = {
   port: PORT,
   cors: {
     credentials: true,
-    origin: HOST
+    origin: '*'
   },
   debug: true,
   // playground: '/playground',

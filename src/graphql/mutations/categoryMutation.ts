@@ -5,24 +5,26 @@ const todoMutation = (t: ObjectDefinitionBlock<"Mutation">) => {
   // # 카테고리
   t.crud.createOnetodo_category();
   t.crud.updateOnetodo_category();
+  t.crud.deleteOnetodo_category();
+  
 
   // # todo
   t.crud.createOnetodo();
   t.crud.updateOnetodo();
+  t.crud.deleteOnetodo();
 
-
-  t.field("tt", {
-    type: 'user',
-    args: {
-      user_id: schema.stringArg()
-    },
-    resolve: (...args): any => {
-      console.log('> ', args);
-      return {
-        user_id: 'r'
-      };
-    }
-  })
+  // t.field("tt", {
+  //   type: 'user',
+  //   args: {
+  //     user_id: schema.stringArg()
+  //   },
+  //   resolve: (...args): any => {
+  //     console.log('> ', args);
+  //     return {
+  //       user_id: 'r'
+  //     };
+  //   }
+  // })
 
 };
 

@@ -7,8 +7,26 @@ const Mutation = schema.mutationType({
     // ===== 유저 등록
     // t.crud.createOneuser();
 
-    categoryMutation(t)
+    // categoryMutation(t)
 
+    t.crud.createOnetodo_category();
+    t.crud.updateOnetodo_category();
+    t.crud.deleteOnetodo_category()
+
+    t.crud.createOnetodo();
+    t.crud.updateOnetodo();
+    t.crud.deleteOnetodo();
+
+    t.boolean('mInvalidToken', {
+      args: {
+        t: schema.intArg()
+      },
+      authorize: () => false,
+      resolve: () => {
+        return true;
+      }
+    })
+    
     // ===== 유저 등록
     // t.field('signup', {
     //   type: 'user',
@@ -31,7 +49,7 @@ const Mutation = schema.mutationType({
     //   }
     // })
 
-    t.crud.createOneuser();
+    // t.crud.createOneuser();
     
     // t.field('user', {
     //   type: 'user',

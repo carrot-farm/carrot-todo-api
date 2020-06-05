@@ -6,19 +6,20 @@ import { GraphQLServer } from 'graphql-yoga';
 import { context } from './context';
 import { schema } from './graphql';
 import middlewares from './middlewares';
-import permissionMiddleware from './middlewares/permissionMiddleware'
+import authencationMiddleware from './middlewares/authencationMiddleware'
 import api from './api';
 import { server } from 'typescript';
 
 // ==== 환경변수
-const { PORT, HOST } = process.env;
+const { PORT, WEB_CLIENT_HOST } = process.env;
 let isDisableKeepAlive = false; // keep-alive 비활성화 플래그.
 
 // ===== 서버 인스턴스 생성
 const graphqlServer = new GraphQLServer({
   schema,
   context,
-  middlewares: [permissionMiddleware]
+  // middlewares: [authencationMiddleware]
+  
 });
 
 // ===== express
@@ -32,12 +33,14 @@ const servrOptions = {
   port: PORT,
   cors: {
     credentials: true,
-    origin: '*'
+    origin: [WEB_CLIENT_HOST!]
   },
   debug: true,
   // playground: '/playground',
 }
-const server = graphqlServer.start(servrOptions, () => console.log(`> server start ${PORT}`))
+const server = graphqlServer.start(servrOptions, 
+  () => console.log(`> server start ${PORT}`)
+)
 
 // ===== 시작 후 관련 처리
 server.then(function paran(s: any) {

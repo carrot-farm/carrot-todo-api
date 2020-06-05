@@ -111,8 +111,9 @@ input login_logWhereUniqueInput {
 type Mutation {
   createOnetodo(data: todoCreateInput!): todo!
   createOnetodo_category(data: todo_categoryCreateInput!): todo_category!
-  createOneuser(data: userCreateInput!): user!
-  tt(user_id: String): user!
+  deleteOnetodo(where: todoWhereUniqueInput!): todo
+  deleteOnetodo_category(where: todo_categoryWhereUniqueInput!): todo_category
+  mInvalidToken(t: Int): Boolean!
   updateOnetodo(data: todoUpdateInput!, where: todoWhereUniqueInput!): todo
   updateOnetodo_category(data: todo_categoryUpdateInput!, where: todo_categoryWhereUniqueInput!): todo_category
 }
@@ -219,15 +220,112 @@ enum OrderByArg {
 }
 
 type Query {
+  checkToken: String!
+
+  """Access/Refresh 토큰 발급"""
+  getTokens: Boolean!
+
   """테스트"""
   info: String!
-  test: String!
+
+  """유저 정보 가져오기"""
+  myInfo: user!
+
+  """accessToken 재발급"""
+  reissueToken: Boolean!
+
+  """토큰 삭제"""
+  removeToken(tokenType: String): Boolean!
+
+  """인증 에러시"""
+  testInvalidToken: Boolean!
   todo(where: todoWhereUniqueInput!): todo
-  todoCategories(after: todo_categoryWhereUniqueInput, before: todo_categoryWhereUniqueInput, first: Int, last: Int, skip: Int): [todo_category!]!
+  todoCategories(orderBy: todo_categoryOrderByInput, skip: Int, where: todo_categoryWhereInput): [todo_category!]!
   todoCategory(where: todo_categoryWhereUniqueInput!): todo_category
-  todos(after: todoWhereUniqueInput, before: todoWhereUniqueInput, first: Int, last: Int, orderBy: todoOrderByInput, skip: Int, where: todoWhereInput): [todo!]!
-  user(where: userWhereUniqueInput!): user
-  users(after: userWhereUniqueInput, before: userWhereUniqueInput, first: Int, last: Int, skip: Int): [user!]!
+  todos(orderBy: todoOrderByInput, skip: Int, where: todoWhereInput): [todo!]!
+}
+
+input refresh_tokenCreateManyWithoutUserInput {
+  connect: [refresh_tokenWhereUniqueInput!]
+  create: [refresh_tokenCreateWithoutUserInput!]
+}
+
+input refresh_tokenCreateWithoutUserInput {
+  expires_time: Int!
+  refresh_token: String!
+}
+
+input refresh_tokenFilter {
+  every: refresh_tokenWhereInput
+  none: refresh_tokenWhereInput
+  some: refresh_tokenWhereInput
+}
+
+input refresh_tokenScalarWhereInput {
+  AND: [refresh_tokenScalarWhereInput!]
+  expires_time: IntFilter
+  id: IntFilter
+  NOT: [refresh_tokenScalarWhereInput!]
+  OR: [refresh_tokenScalarWhereInput!]
+  refresh_token: StringFilter
+  user_pk: IntFilter
+}
+
+input refresh_tokenUpdateManyDataInput {
+  expires_time: Int
+  id: Int
+  refresh_token: String
+}
+
+input refresh_tokenUpdateManyWithoutUserInput {
+  connect: [refresh_tokenWhereUniqueInput!]
+  create: [refresh_tokenCreateWithoutUserInput!]
+  delete: [refresh_tokenWhereUniqueInput!]
+  deleteMany: [refresh_tokenScalarWhereInput!]
+  disconnect: [refresh_tokenWhereUniqueInput!]
+  set: [refresh_tokenWhereUniqueInput!]
+  update: [refresh_tokenUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [refresh_tokenUpdateManyWithWhereNestedInput!]
+  upsert: [refresh_tokenUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input refresh_tokenUpdateManyWithWhereNestedInput {
+  data: refresh_tokenUpdateManyDataInput!
+  where: refresh_tokenScalarWhereInput!
+}
+
+input refresh_tokenUpdateWithoutUserDataInput {
+  expires_time: Int
+  id: Int
+  refresh_token: String
+}
+
+input refresh_tokenUpdateWithWhereUniqueWithoutUserInput {
+  data: refresh_tokenUpdateWithoutUserDataInput!
+  where: refresh_tokenWhereUniqueInput!
+}
+
+input refresh_tokenUpsertWithWhereUniqueWithoutUserInput {
+  create: refresh_tokenCreateWithoutUserInput!
+  update: refresh_tokenUpdateWithoutUserDataInput!
+  where: refresh_tokenWhereUniqueInput!
+}
+
+input refresh_tokenWhereInput {
+  AND: [refresh_tokenWhereInput!]
+  expires_time: IntFilter
+  id: IntFilter
+  NOT: [refresh_tokenWhereInput!]
+  OR: [refresh_tokenWhereInput!]
+  refresh_token: StringFilter
+  user: userWhereInput
+  user_pk: IntFilter
+}
+
+input refresh_tokenWhereUniqueInput {
+  expires_time: Int
+  id: Int
+  user_pk: Int
 }
 
 input register_logCreateManyWithoutUserInput {
@@ -340,9 +438,7 @@ type todo_category {
 
 input todo_categoryCreateInput {
   category: String!
-  created_time: DateTime
   todo: todoCreateManyWithoutTodo_categoryInput
-  updated_time: DateTime
   user: userCreateOneWithoutTodo_categoryInput!
 }
 
@@ -358,16 +454,12 @@ input todo_categoryCreateOneWithoutTodoInput {
 
 input todo_categoryCreateWithoutTodoInput {
   category: String!
-  created_time: DateTime
-  updated_time: DateTime
   user: userCreateOneWithoutTodo_categoryInput!
 }
 
 input todo_categoryCreateWithoutUserInput {
   category: String!
-  created_time: DateTime
   todo: todoCreateManyWithoutTodo_categoryInput
-  updated_time: DateTime
 }
 
 input todo_categoryFilter {
@@ -376,32 +468,32 @@ input todo_categoryFilter {
   some: todo_categoryWhereInput
 }
 
+input todo_categoryOrderByInput {
+  category: OrderByArg
+  id: OrderByArg
+  user_pk: OrderByArg
+}
+
 input todo_categoryScalarWhereInput {
   AND: [todo_categoryScalarWhereInput!]
   category: StringFilter
-  created_time: DateTimeFilter
   id: IntFilter
   NOT: [todo_categoryScalarWhereInput!]
   OR: [todo_categoryScalarWhereInput!]
   todo: todoFilter
-  updated_time: DateTimeFilter
   user_pk: IntFilter
 }
 
 input todo_categoryUpdateInput {
   category: String
-  created_time: DateTime
   id: Int
   todo: todoUpdateManyWithoutTodo_categoryInput
-  updated_time: DateTime
   user: userUpdateOneRequiredWithoutTodo_categoryInput
 }
 
 input todo_categoryUpdateManyDataInput {
   category: String
-  created_time: DateTime
   id: Int
-  updated_time: DateTime
 }
 
 input todo_categoryUpdateManyWithoutUserInput {
@@ -430,18 +522,14 @@ input todo_categoryUpdateOneRequiredWithoutTodoInput {
 
 input todo_categoryUpdateWithoutTodoDataInput {
   category: String
-  created_time: DateTime
   id: Int
-  updated_time: DateTime
   user: userUpdateOneRequiredWithoutTodo_categoryInput
 }
 
 input todo_categoryUpdateWithoutUserDataInput {
   category: String
-  created_time: DateTime
   id: Int
   todo: todoUpdateManyWithoutTodo_categoryInput
-  updated_time: DateTime
 }
 
 input todo_categoryUpdateWithWhereUniqueWithoutUserInput {
@@ -463,12 +551,10 @@ input todo_categoryUpsertWithWhereUniqueWithoutUserInput {
 input todo_categoryWhereInput {
   AND: [todo_categoryWhereInput!]
   category: StringFilter
-  created_time: DateTimeFilter
   id: IntFilter
   NOT: [todo_categoryWhereInput!]
   OR: [todo_categoryWhereInput!]
   todo: todoFilter
-  updated_time: DateTimeFilter
   user: userWhereInput
   user_pk: IntFilter
 }
@@ -479,11 +565,9 @@ input todo_categoryWhereUniqueInput {
 }
 
 input todoCreateInput {
-  created_time: DateTime
-  is_completed: Int
+  is_completed: Int!
   todo: String
   todo_category: todo_categoryCreateOneWithoutTodoInput!
-  updated_time: DateTime
   user: userCreateOneWithoutTodoInput!
 }
 
@@ -498,19 +582,15 @@ input todoCreateManyWithoutUserInput {
 }
 
 input todoCreateWithoutTodo_categoryInput {
-  created_time: DateTime
-  is_completed: Int
+  is_completed: Int!
   todo: String
-  updated_time: DateTime
   user: userCreateOneWithoutTodoInput!
 }
 
 input todoCreateWithoutUserInput {
-  created_time: DateTime
-  is_completed: Int
+  is_completed: Int!
   todo: String
   todo_category: todo_categoryCreateOneWithoutTodoInput!
-  updated_time: DateTime
 }
 
 input todoFilter {
@@ -520,44 +600,36 @@ input todoFilter {
 }
 
 input todoOrderByInput {
-  created_time: OrderByArg
   id: OrderByArg
   is_completed: OrderByArg
   todo: OrderByArg
   todo_category_pk: OrderByArg
-  updated_time: OrderByArg
   user_pk: OrderByArg
 }
 
 input todoScalarWhereInput {
   AND: [todoScalarWhereInput!]
-  created_time: DateTimeFilter
   id: IntFilter
   is_completed: IntFilter
   NOT: [todoScalarWhereInput!]
   OR: [todoScalarWhereInput!]
   todo: NullableStringFilter
   todo_category_pk: IntFilter
-  updated_time: DateTimeFilter
   user_pk: IntFilter
 }
 
 input todoUpdateInput {
-  created_time: DateTime
   id: Int
   is_completed: Int
   todo: String
   todo_category: todo_categoryUpdateOneRequiredWithoutTodoInput
-  updated_time: DateTime
   user: userUpdateOneRequiredWithoutTodoInput
 }
 
 input todoUpdateManyDataInput {
-  created_time: DateTime
   id: Int
   is_completed: Int
   todo: String
-  updated_time: DateTime
 }
 
 input todoUpdateManyWithoutTodo_categoryInput {
@@ -590,21 +662,17 @@ input todoUpdateManyWithWhereNestedInput {
 }
 
 input todoUpdateWithoutTodo_categoryDataInput {
-  created_time: DateTime
   id: Int
   is_completed: Int
   todo: String
-  updated_time: DateTime
   user: userUpdateOneRequiredWithoutTodoInput
 }
 
 input todoUpdateWithoutUserDataInput {
-  created_time: DateTime
   id: Int
   is_completed: Int
   todo: String
   todo_category: todo_categoryUpdateOneRequiredWithoutTodoInput
-  updated_time: DateTime
 }
 
 input todoUpdateWithWhereUniqueWithoutTodo_categoryInput {
@@ -631,7 +699,6 @@ input todoUpsertWithWhereUniqueWithoutUserInput {
 
 input todoWhereInput {
   AND: [todoWhereInput!]
-  created_time: DateTimeFilter
   id: IntFilter
   is_completed: IntFilter
   NOT: [todoWhereInput!]
@@ -639,7 +706,6 @@ input todoWhereInput {
   todo: NullableStringFilter
   todo_category: todo_categoryWhereInput
   todo_category_pk: IntFilter
-  updated_time: DateTimeFilter
   user: userWhereInput
   user_pk: IntFilter
 }
@@ -656,25 +722,9 @@ type user {
   is_block: Int!
   is_verify: Int!
   is_withdraw: Int!
-  password: String!
-  password_salt: String!
+  password: String
+  password_salt: String
   user_id: String!
-}
-
-input userCreateInput {
-  email: String!
-  is_block: Int
-  is_verify: Int
-  is_withdraw: Int
-  login_log: login_logCreateManyWithoutUserInput
-  oauth: oauthCreateManyWithoutUserInput
-  password: String!
-  password_salt: String!
-  register_log: register_logCreateManyWithoutUserInput
-  todo: todoCreateManyWithoutUserInput
-  todo_category: todo_categoryCreateManyWithoutUserInput
-  user_id: String!
-  withdraw_log: withdraw_logCreateManyWithoutUserInput
 }
 
 input userCreateOneWithoutTodo_categoryInput {
@@ -689,13 +739,14 @@ input userCreateOneWithoutTodoInput {
 
 input userCreateWithoutTodo_categoryInput {
   email: String!
-  is_block: Int
-  is_verify: Int
-  is_withdraw: Int
+  is_block: Int!
+  is_verify: Int!
+  is_withdraw: Int!
   login_log: login_logCreateManyWithoutUserInput
   oauth: oauthCreateManyWithoutUserInput
-  password: String!
-  password_salt: String!
+  password: String
+  password_salt: String
+  refresh_token: refresh_tokenCreateManyWithoutUserInput
   register_log: register_logCreateManyWithoutUserInput
   todo: todoCreateManyWithoutUserInput
   user_id: String!
@@ -704,13 +755,14 @@ input userCreateWithoutTodo_categoryInput {
 
 input userCreateWithoutTodoInput {
   email: String!
-  is_block: Int
-  is_verify: Int
-  is_withdraw: Int
+  is_block: Int!
+  is_verify: Int!
+  is_withdraw: Int!
   login_log: login_logCreateManyWithoutUserInput
   oauth: oauthCreateManyWithoutUserInput
-  password: String!
-  password_salt: String!
+  password: String
+  password_salt: String
+  refresh_token: refresh_tokenCreateManyWithoutUserInput
   register_log: register_logCreateManyWithoutUserInput
   todo_category: todo_categoryCreateManyWithoutUserInput
   user_id: String!
@@ -741,6 +793,7 @@ input userUpdateWithoutTodo_categoryDataInput {
   oauth: oauthUpdateManyWithoutUserInput
   password: String
   password_salt: String
+  refresh_token: refresh_tokenUpdateManyWithoutUserInput
   register_log: register_logUpdateManyWithoutUserInput
   todo: todoUpdateManyWithoutUserInput
   user_id: String
@@ -757,6 +810,7 @@ input userUpdateWithoutTodoDataInput {
   oauth: oauthUpdateManyWithoutUserInput
   password: String
   password_salt: String
+  refresh_token: refresh_tokenUpdateManyWithoutUserInput
   register_log: register_logUpdateManyWithoutUserInput
   todo_category: todo_categoryUpdateManyWithoutUserInput
   user_id: String
@@ -784,8 +838,9 @@ input userWhereInput {
   NOT: [userWhereInput!]
   oauth: oauthFilter
   OR: [userWhereInput!]
-  password: StringFilter
-  password_salt: StringFilter
+  password: NullableStringFilter
+  password_salt: NullableStringFilter
+  refresh_token: refresh_tokenFilter
   register_log: register_logFilter
   todo: todoFilter
   todo_category: todo_categoryFilter
@@ -806,7 +861,7 @@ input withdraw_logCreateManyWithoutUserInput {
 
 input withdraw_logCreateWithoutUserInput {
   withdraw_ip: String!
-  withdraw_time: DateTime
+  withdraw_time: DateTime!
 }
 
 input withdraw_logFilter {

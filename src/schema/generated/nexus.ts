@@ -52,6 +52,9 @@ export interface NexusGenInputs {
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
   }
+  QueryTodosWhereInput: { // input type
+    is_completed?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
   StringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -480,7 +483,6 @@ export interface NexusGenInputs {
   todo_categoryCreateInput: { // input type
     category: string; // String!
     todo?: NexusGenInputs['todoCreateManyWithoutTodo_categoryInput'] | null; // todoCreateManyWithoutTodo_categoryInput
-    user: NexusGenInputs['userCreateOneWithoutTodo_categoryInput']; // userCreateOneWithoutTodo_categoryInput!
   }
   todo_categoryCreateManyWithoutUserInput: { // input type
     connect?: NexusGenInputs['todo_categoryWhereUniqueInput'][] | null; // [todo_categoryWhereUniqueInput!]
@@ -521,7 +523,6 @@ export interface NexusGenInputs {
     category?: string | null; // String
     id?: number | null; // Int
     todo?: NexusGenInputs['todoUpdateManyWithoutTodo_categoryInput'] | null; // todoUpdateManyWithoutTodo_categoryInput
-    user?: NexusGenInputs['userUpdateOneRequiredWithoutTodo_categoryInput'] | null; // userUpdateOneRequiredWithoutTodo_categoryInput
   }
   todo_categoryUpdateManyDataInput: { // input type
     category?: string | null; // String
@@ -787,6 +788,7 @@ export interface NexusGenRootTypes {
   todo_category: { // root type
     category: string; // String!
     id: number; // Int!
+    user_pk: number; // Int!
   }
   user: { // root type
     email: string; // String!
@@ -810,6 +812,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   DateTimeFilter: NexusGenInputs['DateTimeFilter'];
   IntFilter: NexusGenInputs['IntFilter'];
   NullableStringFilter: NexusGenInputs['NullableStringFilter'];
+  QueryTodosWhereInput: NexusGenInputs['QueryTodosWhereInput'];
   StringFilter: NexusGenInputs['StringFilter'];
   login_logCreateManyWithoutUserInput: NexusGenInputs['login_logCreateManyWithoutUserInput'];
   login_logCreateWithoutUserInput: NexusGenInputs['login_logCreateWithoutUserInput'];
@@ -959,6 +962,7 @@ export interface NexusGenFieldTypes {
   todo_category: { // field return type
     category: string; // String!
     id: number; // Int!
+    user_pk: number; // Int!
   }
   user: { // field return type
     email: string; // String!
@@ -1016,7 +1020,7 @@ export interface NexusGenArgTypes {
     todos: { // args
       orderBy?: NexusGenInputs['todoOrderByInput'] | null; // todoOrderByInput
       skip?: number | null; // Int
-      where?: NexusGenInputs['todoWhereInput'] | null; // todoWhereInput
+      where?: NexusGenInputs['QueryTodosWhereInput'] | null; // QueryTodosWhereInput
     }
   }
 }
@@ -1028,7 +1032,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Mutation" | "Query" | "todo" | "todo_category" | "user";
 
-export type NexusGenInputNames = "DateTimeFilter" | "IntFilter" | "NullableStringFilter" | "StringFilter" | "login_logCreateManyWithoutUserInput" | "login_logCreateWithoutUserInput" | "login_logFilter" | "login_logScalarWhereInput" | "login_logUpdateManyDataInput" | "login_logUpdateManyWithWhereNestedInput" | "login_logUpdateManyWithoutUserInput" | "login_logUpdateWithWhereUniqueWithoutUserInput" | "login_logUpdateWithoutUserDataInput" | "login_logUpsertWithWhereUniqueWithoutUserInput" | "login_logWhereInput" | "login_logWhereUniqueInput" | "oauthCreateManyWithoutUserInput" | "oauthCreateWithoutUserInput" | "oauthFilter" | "oauthScalarWhereInput" | "oauthUpdateManyDataInput" | "oauthUpdateManyWithWhereNestedInput" | "oauthUpdateManyWithoutUserInput" | "oauthUpdateWithWhereUniqueWithoutUserInput" | "oauthUpdateWithoutUserDataInput" | "oauthUpsertWithWhereUniqueWithoutUserInput" | "oauthWhereInput" | "oauthWhereUniqueInput" | "refresh_tokenCreateManyWithoutUserInput" | "refresh_tokenCreateWithoutUserInput" | "refresh_tokenFilter" | "refresh_tokenScalarWhereInput" | "refresh_tokenUpdateManyDataInput" | "refresh_tokenUpdateManyWithWhereNestedInput" | "refresh_tokenUpdateManyWithoutUserInput" | "refresh_tokenUpdateWithWhereUniqueWithoutUserInput" | "refresh_tokenUpdateWithoutUserDataInput" | "refresh_tokenUpsertWithWhereUniqueWithoutUserInput" | "refresh_tokenWhereInput" | "refresh_tokenWhereUniqueInput" | "register_logCreateManyWithoutUserInput" | "register_logCreateWithoutUserInput" | "register_logFilter" | "register_logScalarWhereInput" | "register_logUpdateManyDataInput" | "register_logUpdateManyWithWhereNestedInput" | "register_logUpdateManyWithoutUserInput" | "register_logUpdateWithWhereUniqueWithoutUserInput" | "register_logUpdateWithoutUserDataInput" | "register_logUpsertWithWhereUniqueWithoutUserInput" | "register_logWhereInput" | "register_logWhereUniqueInput" | "todoCreateInput" | "todoCreateManyWithoutTodo_categoryInput" | "todoCreateManyWithoutUserInput" | "todoCreateWithoutTodo_categoryInput" | "todoCreateWithoutUserInput" | "todoFilter" | "todoOrderByInput" | "todoScalarWhereInput" | "todoUpdateInput" | "todoUpdateManyDataInput" | "todoUpdateManyWithWhereNestedInput" | "todoUpdateManyWithoutTodo_categoryInput" | "todoUpdateManyWithoutUserInput" | "todoUpdateWithWhereUniqueWithoutTodo_categoryInput" | "todoUpdateWithWhereUniqueWithoutUserInput" | "todoUpdateWithoutTodo_categoryDataInput" | "todoUpdateWithoutUserDataInput" | "todoUpsertWithWhereUniqueWithoutTodo_categoryInput" | "todoUpsertWithWhereUniqueWithoutUserInput" | "todoWhereInput" | "todoWhereUniqueInput" | "todo_categoryCreateInput" | "todo_categoryCreateManyWithoutUserInput" | "todo_categoryCreateOneWithoutTodoInput" | "todo_categoryCreateWithoutTodoInput" | "todo_categoryCreateWithoutUserInput" | "todo_categoryFilter" | "todo_categoryOrderByInput" | "todo_categoryScalarWhereInput" | "todo_categoryUpdateInput" | "todo_categoryUpdateManyDataInput" | "todo_categoryUpdateManyWithWhereNestedInput" | "todo_categoryUpdateManyWithoutUserInput" | "todo_categoryUpdateOneRequiredWithoutTodoInput" | "todo_categoryUpdateWithWhereUniqueWithoutUserInput" | "todo_categoryUpdateWithoutTodoDataInput" | "todo_categoryUpdateWithoutUserDataInput" | "todo_categoryUpsertWithWhereUniqueWithoutUserInput" | "todo_categoryUpsertWithoutTodoInput" | "todo_categoryWhereInput" | "todo_categoryWhereUniqueInput" | "userCreateOneWithoutTodoInput" | "userCreateOneWithoutTodo_categoryInput" | "userCreateWithoutTodoInput" | "userCreateWithoutTodo_categoryInput" | "userUpdateOneRequiredWithoutTodoInput" | "userUpdateOneRequiredWithoutTodo_categoryInput" | "userUpdateWithoutTodoDataInput" | "userUpdateWithoutTodo_categoryDataInput" | "userUpsertWithoutTodoInput" | "userUpsertWithoutTodo_categoryInput" | "userWhereInput" | "userWhereUniqueInput" | "withdraw_logCreateManyWithoutUserInput" | "withdraw_logCreateWithoutUserInput" | "withdraw_logFilter" | "withdraw_logScalarWhereInput" | "withdraw_logUpdateManyDataInput" | "withdraw_logUpdateManyWithWhereNestedInput" | "withdraw_logUpdateManyWithoutUserInput" | "withdraw_logUpdateWithWhereUniqueWithoutUserInput" | "withdraw_logUpdateWithoutUserDataInput" | "withdraw_logUpsertWithWhereUniqueWithoutUserInput" | "withdraw_logWhereInput" | "withdraw_logWhereUniqueInput";
+export type NexusGenInputNames = "DateTimeFilter" | "IntFilter" | "NullableStringFilter" | "QueryTodosWhereInput" | "StringFilter" | "login_logCreateManyWithoutUserInput" | "login_logCreateWithoutUserInput" | "login_logFilter" | "login_logScalarWhereInput" | "login_logUpdateManyDataInput" | "login_logUpdateManyWithWhereNestedInput" | "login_logUpdateManyWithoutUserInput" | "login_logUpdateWithWhereUniqueWithoutUserInput" | "login_logUpdateWithoutUserDataInput" | "login_logUpsertWithWhereUniqueWithoutUserInput" | "login_logWhereInput" | "login_logWhereUniqueInput" | "oauthCreateManyWithoutUserInput" | "oauthCreateWithoutUserInput" | "oauthFilter" | "oauthScalarWhereInput" | "oauthUpdateManyDataInput" | "oauthUpdateManyWithWhereNestedInput" | "oauthUpdateManyWithoutUserInput" | "oauthUpdateWithWhereUniqueWithoutUserInput" | "oauthUpdateWithoutUserDataInput" | "oauthUpsertWithWhereUniqueWithoutUserInput" | "oauthWhereInput" | "oauthWhereUniqueInput" | "refresh_tokenCreateManyWithoutUserInput" | "refresh_tokenCreateWithoutUserInput" | "refresh_tokenFilter" | "refresh_tokenScalarWhereInput" | "refresh_tokenUpdateManyDataInput" | "refresh_tokenUpdateManyWithWhereNestedInput" | "refresh_tokenUpdateManyWithoutUserInput" | "refresh_tokenUpdateWithWhereUniqueWithoutUserInput" | "refresh_tokenUpdateWithoutUserDataInput" | "refresh_tokenUpsertWithWhereUniqueWithoutUserInput" | "refresh_tokenWhereInput" | "refresh_tokenWhereUniqueInput" | "register_logCreateManyWithoutUserInput" | "register_logCreateWithoutUserInput" | "register_logFilter" | "register_logScalarWhereInput" | "register_logUpdateManyDataInput" | "register_logUpdateManyWithWhereNestedInput" | "register_logUpdateManyWithoutUserInput" | "register_logUpdateWithWhereUniqueWithoutUserInput" | "register_logUpdateWithoutUserDataInput" | "register_logUpsertWithWhereUniqueWithoutUserInput" | "register_logWhereInput" | "register_logWhereUniqueInput" | "todoCreateInput" | "todoCreateManyWithoutTodo_categoryInput" | "todoCreateManyWithoutUserInput" | "todoCreateWithoutTodo_categoryInput" | "todoCreateWithoutUserInput" | "todoFilter" | "todoOrderByInput" | "todoScalarWhereInput" | "todoUpdateInput" | "todoUpdateManyDataInput" | "todoUpdateManyWithWhereNestedInput" | "todoUpdateManyWithoutTodo_categoryInput" | "todoUpdateManyWithoutUserInput" | "todoUpdateWithWhereUniqueWithoutTodo_categoryInput" | "todoUpdateWithWhereUniqueWithoutUserInput" | "todoUpdateWithoutTodo_categoryDataInput" | "todoUpdateWithoutUserDataInput" | "todoUpsertWithWhereUniqueWithoutTodo_categoryInput" | "todoUpsertWithWhereUniqueWithoutUserInput" | "todoWhereInput" | "todoWhereUniqueInput" | "todo_categoryCreateInput" | "todo_categoryCreateManyWithoutUserInput" | "todo_categoryCreateOneWithoutTodoInput" | "todo_categoryCreateWithoutTodoInput" | "todo_categoryCreateWithoutUserInput" | "todo_categoryFilter" | "todo_categoryOrderByInput" | "todo_categoryScalarWhereInput" | "todo_categoryUpdateInput" | "todo_categoryUpdateManyDataInput" | "todo_categoryUpdateManyWithWhereNestedInput" | "todo_categoryUpdateManyWithoutUserInput" | "todo_categoryUpdateOneRequiredWithoutTodoInput" | "todo_categoryUpdateWithWhereUniqueWithoutUserInput" | "todo_categoryUpdateWithoutTodoDataInput" | "todo_categoryUpdateWithoutUserDataInput" | "todo_categoryUpsertWithWhereUniqueWithoutUserInput" | "todo_categoryUpsertWithoutTodoInput" | "todo_categoryWhereInput" | "todo_categoryWhereUniqueInput" | "userCreateOneWithoutTodoInput" | "userCreateOneWithoutTodo_categoryInput" | "userCreateWithoutTodoInput" | "userCreateWithoutTodo_categoryInput" | "userUpdateOneRequiredWithoutTodoInput" | "userUpdateOneRequiredWithoutTodo_categoryInput" | "userUpdateWithoutTodoDataInput" | "userUpdateWithoutTodo_categoryDataInput" | "userUpsertWithoutTodoInput" | "userUpsertWithoutTodo_categoryInput" | "userWhereInput" | "userWhereUniqueInput" | "withdraw_logCreateManyWithoutUserInput" | "withdraw_logCreateWithoutUserInput" | "withdraw_logFilter" | "withdraw_logScalarWhereInput" | "withdraw_logUpdateManyDataInput" | "withdraw_logUpdateManyWithWhereNestedInput" | "withdraw_logUpdateManyWithoutUserInput" | "withdraw_logUpdateWithWhereUniqueWithoutUserInput" | "withdraw_logUpdateWithoutUserDataInput" | "withdraw_logUpsertWithWhereUniqueWithoutUserInput" | "withdraw_logWhereInput" | "withdraw_logWhereUniqueInput";
 
 export type NexusGenEnumNames = "OrderByArg";
 

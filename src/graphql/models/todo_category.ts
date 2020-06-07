@@ -6,6 +6,7 @@ const todo_category = schema.objectType({
   definition(t) {
     t.model.category();
     t.model.id();
+    t.model.user_pk();
   }
 });
 

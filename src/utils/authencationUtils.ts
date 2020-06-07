@@ -2,14 +2,17 @@ import { sign, verify } from 'jsonwebtoken';
 import * as express from 'express';
 
 import { TTokenPublish, TTokenInfo, TTokenUserInfo, TTokenType } from '../types/authenticate';
-import { calculationDate } from '../utils/dateUtil'
+import { TContextCreator } from '../types/context';
+import { calculationDate } from '../utils/dateUtil';
+
 
 // ===== 환경 변수
 const {
   TOKEN_SECRET,
   TOKEN_ISSUER,
   TOKEN_SUBJECT,
-  TOKEN_EXPIRES_IN
+  TOKEN_EXPIRES_IN,
+  TOKEN_REFRESH_SECRET
 } = process.env;
 
 /** 
@@ -85,11 +88,87 @@ export const issueTokenCookie = async (tokenType: TTokenType, {
   }
   
   // # 토큰 발행
-  res.cookie(tokenType, `Bearer ${token}`, {
+  const bearerToken = `Bearer ${token}`;
+  res.cookie(tokenType, bearerToken, {
     expires: new Date(tokenExp),
     httpOnly: true,
     sameSite: true
   });
 
-  return token;
-}
+  return bearerToken;
+};
+
+
+// ===== 악세스 토큰 재발급
+export const reissueToken = async (ctx: TContextCreator) => {
+  const req = ctx.request;
+  const res = ctx.response;
+  const refreshToken = req.cookies.refreshToken && req.cookies.refreshToken.split('Bearer ')[1];
+  const date = new Date();
+
+  // console.log('> call reissueToken')
+
+  // # refresh token이 없을 때
+  if(!refreshToken) {
+    throw new Error('not found refresh token');
+  }
+  
+  try {
+    const tokenInfo: any = verify(refreshToken, TOKEN_REFRESH_SECRET!);
+    
+    const now = Math.floor(date.getTime() / 1000);
+    const diff = Math.floor((tokenInfo.exp - now) / 60 / 60); // 유효기간 중 남은 시간(시)
+    
+
+    // # db에서 유효 토큰 찾기
+    const dbTokens = await req.prisma.refresh_token.findMany({
+      where: {
+        user_pk: tokenInfo.userId,
+        expires_time: {
+          gte: now
+        },
+        refresh_token: {
+          equals: refreshToken
+        }
+      },
+    });
+
+    // # db에 해당 토큰이 없으면 에러
+    if(!dbTokens.length) {
+      throw new Error('invalid refresh token');
+    }
+
+    // # accessToken 발급
+    req.cookies.accessToken = await issueTokenCookie('accessToken', {
+      data: {
+        userId: tokenInfo.userId
+      },
+      req,
+      res
+    });
+    
+    
+    // # 리프레시 토큰 유효기시간이 5시간 미만일 경우 재발급
+    if(diff < 5) {
+      // # refresh accessToken 발급
+      req.cookies.refreshToken = await issueTokenCookie('refreshToken', {
+        data: {
+          userId: tokenInfo.userId
+        },
+        req,
+        res
+      });
+    }
+    
+    // console.log(tokenInfo, now, diff, dbTokens);
+    return true;
+  } catch(e) {
+    // console.error(e)
+    res.cookie('accessToken', '', { maxAge: -1 });
+    res.cookie('refreshToken', '', { maxAge: -1 });
+    throw new Error('invalid refresh token');
+  }
+};
+
+
+

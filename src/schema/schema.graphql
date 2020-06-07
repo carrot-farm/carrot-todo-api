@@ -242,7 +242,11 @@ type Query {
   todo(where: todoWhereUniqueInput!): todo
   todoCategories(orderBy: todo_categoryOrderByInput, skip: Int, where: todo_categoryWhereInput): [todo_category!]!
   todoCategory(where: todo_categoryWhereUniqueInput!): todo_category
-  todos(orderBy: todoOrderByInput, skip: Int, where: todoWhereInput): [todo!]!
+  todos(orderBy: todoOrderByInput, skip: Int, where: QueryTodosWhereInput): [todo!]!
+}
+
+input QueryTodosWhereInput {
+  is_completed: IntFilter
 }
 
 input refresh_tokenCreateManyWithoutUserInput {
@@ -434,12 +438,12 @@ type todo {
 type todo_category {
   category: String!
   id: Int!
+  user_pk: Int!
 }
 
 input todo_categoryCreateInput {
   category: String!
   todo: todoCreateManyWithoutTodo_categoryInput
-  user: userCreateOneWithoutTodo_categoryInput!
 }
 
 input todo_categoryCreateManyWithoutUserInput {
@@ -488,7 +492,6 @@ input todo_categoryUpdateInput {
   category: String
   id: Int
   todo: todoUpdateManyWithoutTodo_categoryInput
-  user: userUpdateOneRequiredWithoutTodo_categoryInput
 }
 
 input todo_categoryUpdateManyDataInput {

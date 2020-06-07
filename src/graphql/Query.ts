@@ -39,7 +39,9 @@ const Query = schema.queryType({
     t.crud.todo();
     t.crud.todos({
       ordering: true,
-      filtering: true,
+      filtering: {
+        is_completed: false,
+      },
       pagination: true
     });
 
@@ -208,7 +210,7 @@ const Query = schema.queryType({
       resolve: (_, __, ctx ) => {
         const accessToken = ctx.request.cookies.accessToken;
         const refreshToken = ctx.request.cookies.refreshToken;
-        return `AccessToken: ${accessToken}\nRefreshToken: ${refreshToken}`;
+        return `AccessToken: ${accessToken} ======= RefreshToken: ${refreshToken}`;
       }
     })
 

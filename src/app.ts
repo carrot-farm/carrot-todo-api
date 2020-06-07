@@ -6,7 +6,7 @@ import { GraphQLServer } from 'graphql-yoga';
 import { context } from './context';
 import { schema } from './graphql';
 import middlewares from './middlewares';
-import authencationMiddleware from './middlewares/authencationMiddleware'
+import { graphqlAuthorization } from './middlewares/authencationMiddleware'
 import api from './api';
 import { server } from 'typescript';
 
@@ -18,7 +18,7 @@ let isDisableKeepAlive = false; // keep-alive 비활성화 플래그.
 const graphqlServer = new GraphQLServer({
   schema,
   context,
-  // middlewares: [authencationMiddleware]
+  middlewares: [graphqlAuthorization]
   
 });
 
@@ -36,6 +36,7 @@ const servrOptions = {
     origin: [WEB_CLIENT_HOST!]
   },
   debug: true,
+  
   // playground: '/playground',
 }
 const server = graphqlServer.start(servrOptions, 
@@ -44,7 +45,6 @@ const server = graphqlServer.start(servrOptions,
 
 // ===== 시작 후 관련 처리
 server.then(function paran(s: any) {
-  
   // ===== SIGINT 이벤트 리스닝
   process.on('SIGINT', () => {
     // # keep-alive 비활성화

@@ -28,7 +28,7 @@ model oauth {
 }
 
 model refresh_token {
-  expires_time  Int
+  expires_time  Int    @default(0)
   id            Int    @default(autoincrement()) @id
   refresh_token String
   user_pk       Int

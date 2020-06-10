@@ -2,11 +2,13 @@ import { schema } from 'nexus';
 import * as jwt from 'jsonwebtoken';
 
 // import userQuery from './queries/userQuery';
+import { TContextCreator } from '../types/context'
 import { TTokenInfo } from '../types/authenticate';
 import todoQuery from './queries/todoQuery';
 import { tokenDecode, tokenPublish, issueTokenCookie } from '../utils/authencationUtils';
 import { calculationDate } from '../utils/dateUtil';
-import { createTextChangeRange } from 'typescript';
+import prismaMiddleware from '../middlewares/prismaMiddleware';
+import { pagenation, prismaCount } from '../utils/crudUtil'
 
 
 // ===== 환경 변수
@@ -19,30 +21,37 @@ const {
 // ===== 쿼리
 const Query = schema.queryType({
   definition(t) {
-    // ===== 테스트
-    t.string('info', { 
-      description: '테스트',
-      resolve: () => 'hello',
+
+    // # 카테고리
+    t.list.field('categoriesAll', {
+      type: 'todo_category',
+      authorize: (_, __, ctx) => !!ctx.request.user,
+      resolve: async(_: any, __:any, ctx) => {
+        const data = await ctx.prisma.todo_category.findMany({
+          where: {
+            user_pk: ctx.request.user!.id
+          }
+        })
+        return data;
+      }
     })
-
-    // userQuery(t);?
-
-    // todoQuery(t);
-
-    t.crud.todoCategories({
-      ordering: true,
-      filtering: true,
-      pagination: true
-    });
+    t.list.field('categories', pagenation({ prismaModel: 'todo_category' }))
+    t.int('categoriesCount', prismaCount({ prismaModel: 'todo_category' })) ;
+    // t.crud.todoCategories({
+    //   ordering: true,
+    //   filtering: true,
+    //   pagination: true
+    // });
     t.crud.todoCategory();
-  
+    
+    // # todo
     t.crud.todo();
     t.crud.todos({
       ordering: true,
       filtering: {
         is_completed: false,
       },
-      pagination: true
+      pagination: true,
     });
 
     // ===== 인증 관련
@@ -235,6 +244,7 @@ const Query = schema.queryType({
       description: '유저 정보 가져오기',
       type: 'user',
       authorize: (root, args, ctx: any) => {
+        // console.log('> ', ctx.request.user)
         return !!(ctx.request.user && ctx.request.user.id)
       },
       // 데이터를 찾아와 반환한다.
@@ -253,6 +263,14 @@ const Query = schema.queryType({
         return me;
       },
     })
+
+    // # 인증 유무
+    t.boolean("isAuthencated", {
+      description: "로그인 유무를 확인",
+      resolve: (_:any, args:any, ctx: TContext) => {
+        return !!ctx.request.user;
+      }
+    })
     // t.list.field('users', {
     //   type: 'user',
     //   resolve: async (parent, args, ctx) => {
@@ -263,7 +281,6 @@ const Query = schema.queryType({
     // t.crud.users({
     //   pagination: true
     // });
-
   }
 })
 

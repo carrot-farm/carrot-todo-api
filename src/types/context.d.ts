@@ -9,3 +9,14 @@ export type TContextCreator = ContextParameters &  {
   /** pubsub */
   pubsub: PubSub;
 };
+
+declare global {
+  /** 컨텍스트 */
+  type TContext = ContextParameters & {
+    /** prisma 인스턴스 */
+    prisma: PrismaClient;
+    /** pubsub */
+    pubsub: PubSub;
+  };
+  
+}

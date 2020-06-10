@@ -3,14 +3,14 @@
  */
 import { rule, shield, and, or, not } from 'graphql-shield';
 
-import { TContextCreator} from '../context'
+// import { TContext} from '../context'
 
 
 // ===== 제한 정의
 // # 회원
 const isAuthenticated = rule({ cache: 'contextual' })(
-  async (parent: any, args: any, ctx: TContextCreator, info: any) => {
-    return !!ctx.user
+  async (parent: any, args: any, ctx: TContext, info: any) => {
+    return !!ctx.request.user
   },
 )
 

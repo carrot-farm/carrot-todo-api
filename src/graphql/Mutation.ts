@@ -1,6 +1,7 @@
 import { schema } from 'nexus';
 import categoryMutation from './mutations/categoryMutation';
 import { connectUser } from '../utils/crudUtil';
+import { NOT_AUTHORIZED } from '../const';
 
 
 const Mutation = schema.mutationType({
@@ -16,18 +17,36 @@ const Mutation = schema.mutationType({
         user: connectUser,
       }
     });
+
     // # 카테고리 업데이트
     t.crud.updateOnetodo_category({
       computedInputs: {
         user: connectUser
       }
     });
+
     // # 카테고리 삭제
-    t.crud.deleteOnetodo_category({
-      computedInputs: {
-        user: connectUser
+    t.field('deleteCategory', {
+      type: 'todo_category',
+      description: '카테고리 삭제',
+      args: {
+        id: schema.idArg({ required: true })
+      },
+      authorize: (_:any, args:any, ctx:any) =>
+        !!ctx.request.user,
+      resolve: async (_:any, args:any, ctx:TContext) => {
+        const id = Number(args.id);
+        // console.log('> check params: ', id, ctx.request.user)
+        const res = await ctx.request.prisma.todo_category.delete({
+          where: {
+            id,
+            user_pk: ctx.request.user!.id
+          }
+        });
+        // console.log('> delete done:', res)
+        return res;
       }
-    });
+    })
 
     t.crud.createOnetodo();
     t.crud.updateOnetodo();
@@ -42,6 +61,7 @@ const Mutation = schema.mutationType({
         return true;
       }
     });
+
     
 
     // t.field('createCategoryOne', {

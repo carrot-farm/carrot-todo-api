@@ -4,16 +4,14 @@ import { ContextParameters } from 'graphql-yoga/dist/types';
 import { verify } from 'jsonwebtoken';
 import * as express from 'express';
 
-import { TContextCreator } from '../types/context';
-
 const { TOKEN_SECRET } = process.env;
-const prisma = new PrismaClient(); // 프리스마
+export const prisma = new PrismaClient(); // 프리스마
 const pubsub = new PubSub(); // 구독을 위한 pubsub
 
 // ===== type 정의
 
 
 // ===== context 수정 함수
-export function context(request: ContextParameters): TContextCreator {
+export function context(request: ContextParameters): TContext {
   return {...request, prisma, pubsub };
 };

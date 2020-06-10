@@ -111,8 +111,10 @@ input login_logWhereUniqueInput {
 type Mutation {
   createOnetodo(data: todoCreateInput!): todo!
   createOnetodo_category(data: todo_categoryCreateInput!): todo_category!
+
+  """카테고리 삭제"""
+  deleteCategory(id: ID!): todo_category!
   deleteOnetodo(where: todoWhereUniqueInput!): todo
-  deleteOnetodo_category(where: todo_categoryWhereUniqueInput!): todo_category
   mInvalidToken(t: Int): Boolean!
   updateOnetodo(data: todoUpdateInput!, where: todoWhereUniqueInput!): todo
   updateOnetodo_category(data: todo_categoryUpdateInput!, where: todo_categoryWhereUniqueInput!): todo_category
@@ -220,13 +222,22 @@ enum OrderByArg {
 }
 
 type Query {
+  categories(
+    """페이지 번호"""
+    page: Int!
+
+    """가져올 레코드의 수"""
+    take: Int = 10
+  ): [todo_category!]!
+  categoriesAll: [todo_category!]!
+  categoriesCount: Int!
   checkToken: String!
 
   """Access/Refresh 토큰 발급"""
   getTokens: Boolean!
 
-  """테스트"""
-  info: String!
+  """로그인 유무를 확인"""
+  isAuthencated: Boolean!
 
   """유저 정보 가져오기"""
   myInfo: user!
@@ -240,7 +251,6 @@ type Query {
   """인증 에러시"""
   testInvalidToken: Boolean!
   todo(where: todoWhereUniqueInput!): todo
-  todoCategories(orderBy: todo_categoryOrderByInput, skip: Int, where: todo_categoryWhereInput): [todo_category!]!
   todoCategory(where: todo_categoryWhereUniqueInput!): todo_category
   todos(orderBy: todoOrderByInput, skip: Int, where: QueryTodosWhereInput): [todo!]!
 }
@@ -255,7 +265,7 @@ input refresh_tokenCreateManyWithoutUserInput {
 }
 
 input refresh_tokenCreateWithoutUserInput {
-  expires_time: Int!
+  expires_time: Int
   refresh_token: String!
 }
 
@@ -470,12 +480,6 @@ input todo_categoryFilter {
   every: todo_categoryWhereInput
   none: todo_categoryWhereInput
   some: todo_categoryWhereInput
-}
-
-input todo_categoryOrderByInput {
-  category: OrderByArg
-  id: OrderByArg
-  user_pk: OrderByArg
 }
 
 input todo_categoryScalarWhereInput {

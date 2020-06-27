@@ -6,7 +6,8 @@ import { GraphQLServer } from 'graphql-yoga';
 import { context } from './context';
 import { schema } from './graphql';
 import middlewares from './middlewares';
-import { graphqlAuthorization } from './middlewares/authencationMiddleware'
+import { graphqlAuthorization } from './middlewares/authencationMiddleware';
+import permissionMiddleware from './middlewares/permissionMiddleware';
 import api from './api';
 import { server } from 'typescript';
 
@@ -18,8 +19,7 @@ let isDisableKeepAlive = false; // keep-alive 비활성화 플래그.
 const graphqlServer = new GraphQLServer({
   schema,
   context,
-  middlewares: [graphqlAuthorization]
-  
+  middlewares: [graphqlAuthorization, permissionMiddleware]
 });
 
 // ===== express

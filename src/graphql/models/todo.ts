@@ -7,7 +7,7 @@ const todo = schema.objectType({
     t.model.id();
     t.model.todo();
     t.model.is_completed();
-    t.model.todo_category()
+    t.model.todo_category();
   }
 });
 

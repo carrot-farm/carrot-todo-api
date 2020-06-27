@@ -48,6 +48,7 @@ const Mutation = schema.mutationType({
       }
     })
 
+    // ===== todo
     t.crud.createOnetodo();
     t.crud.updateOnetodo();
     t.crud.deleteOnetodo();

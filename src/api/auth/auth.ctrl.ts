@@ -89,7 +89,7 @@ export const googleLoginCallback = (
         })
       }
       
-      // # 토큰 생성
+      // # 일회용 토큰 생성
       const token = tokenPublish({ userId: user.id }, {
         subject: 'disposableToken',
         expiresIn: '1m',
@@ -115,7 +115,7 @@ export const publishTokens = async (req: express.Request, res: express.Response)
     const date = new Date();
     const refreshTokenExp = calculationDate(date, 14, 'date');
     const accessTokenExp = calculationDate(date, 30, 'minutes');
-    // const refreshTokenExp = Math.floor(date.setTime(date.getTime() / 1000) + (refreshTokenExpDate * 60 * 60 * 24))
+    // console.log('> refreshToken', refreshTokenExp)
     
     // # 일회용 토큰 디코드
     const decoded: any = jwt.verify(req.headers.authorization, TOKEN_DISPOSABLE_SECRET!);

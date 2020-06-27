@@ -251,12 +251,19 @@ type Query {
   """인증 에러시"""
   testInvalidToken: Boolean!
   todo(where: todoWhereUniqueInput!): todo
+  todoCategories(orderBy: todo_categoryOrderByInput, skip: Int, where: todo_categoryWhereInput): [todo_category!]!
   todoCategory(where: todo_categoryWhereUniqueInput!): todo_category
-  todos(orderBy: todoOrderByInput, skip: Int, where: QueryTodosWhereInput): [todo!]!
+  todos(orderBy: QueryTodosOrderByInput, skip: Int, where: QueryTodosWhereInput): [todo!]!
+}
+
+input QueryTodosOrderByInput {
+  id: OrderByArg
 }
 
 input QueryTodosWhereInput {
   is_completed: IntFilter
+  todo_category_pk: IntFilter
+  user_pk: IntFilter
 }
 
 input refresh_tokenCreateManyWithoutUserInput {
@@ -482,6 +489,12 @@ input todo_categoryFilter {
   some: todo_categoryWhereInput
 }
 
+input todo_categoryOrderByInput {
+  category: OrderByArg
+  id: OrderByArg
+  user_pk: OrderByArg
+}
+
 input todo_categoryScalarWhereInput {
   AND: [todo_categoryScalarWhereInput!]
   category: StringFilter
@@ -604,14 +617,6 @@ input todoFilter {
   every: todoWhereInput
   none: todoWhereInput
   some: todoWhereInput
-}
-
-input todoOrderByInput {
-  id: OrderByArg
-  is_completed: OrderByArg
-  todo: OrderByArg
-  todo_category_pk: OrderByArg
-  user_pk: OrderByArg
 }
 
 input todoScalarWhereInput {

@@ -37,19 +37,23 @@ const Query = schema.queryType({
     })
     t.list.field('categories', pagenation({ prismaModel: 'todo_category' }))
     t.int('categoriesCount', prismaCount({ prismaModel: 'todo_category' })) ;
-    // t.crud.todoCategories({
-    //   ordering: true,
-    //   filtering: true,
-    //   pagination: true
-    // });
+    t.crud.todoCategories({
+      ordering: true,
+      filtering: true,
+      pagination: true
+    });
     t.crud.todoCategory();
     
     // # todo
     t.crud.todo();
     t.crud.todos({
-      ordering: true,
+      ordering: {
+        id: true
+      },
       filtering: {
-        is_completed: false,
+        user_pk: true,
+        is_completed: true,
+        todo_category_pk: true
       },
       pagination: true,
     });
@@ -221,7 +225,7 @@ const Query = schema.queryType({
         const refreshToken = ctx.request.cookies.refreshToken;
         return `AccessToken: ${accessToken} ======= RefreshToken: ${refreshToken}`;
       }
-    })
+    });
 
     // # 토큰 삭제
     t.boolean('removeToken', {

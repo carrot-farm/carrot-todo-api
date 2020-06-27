@@ -13,6 +13,7 @@ const {
 
 const middlewares = (app: express.Application) => {
   // console.log('> ', app.use)
+  
   app.use(cookieParser());
   app.use(bodyParser.json());
 
